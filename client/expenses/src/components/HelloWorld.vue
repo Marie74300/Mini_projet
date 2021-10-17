@@ -186,7 +186,8 @@ input:valid {
 .slider{
     width: 100%;
 }
-md-field{
-    width:50%;
+.md-field .md-input{
+    align-content: center;
+    align-items: center;
 }
 </style>
