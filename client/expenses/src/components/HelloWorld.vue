@@ -1,43 +1,49 @@
 <template>
  <div id="HelloWorld">
-    <h2>{{msg}}</h2>
-    <form @submit="ajouterRestaurant">
-            <md-field>
-                <label>Nom : </label>
-                    <md-input type="text"  required v-model="nom"></md-input>
-            </md-field>
-       
-            <md-field>
-                <label>Cuisine :</label>
-                     <md-input type="text" required v-model="cuisine"></md-input>
-                
-            </md-field>
-        <md-button class="md-raised">Ajouter</md-button>
-    </form>
-
-    <h1>Nombre de restaurants : {{nbRestaurantTotal}}</h1>
-    
+    <h2>{{msg}}</h2>>
+    <div class="formulaire">
+        <form @submit="ajouterRestaurant">
+                <md-field>
+                    <label>Nom : </label>
+                        <md-input type="text"  required v-model="nom"></md-input>
+                </md-field>
         
-            <md-field>
-                <label>Chercher par nom: </label>
-                <md-input @input="getRestaurantsFromServer()" type="text" v-model="nomRestoRechercher"></md-input>
-            </md-field>
-            
-    <p>NB pages total : {{nbpageTotal}}</p>
-    <div class="slidecontainer">
-        <h2>Nombre de resto: 
-            
-            <input 
-                @input="getRestaurantsFromServer()"
-                type="range" min="5" max="100" value="50" class="slider" step="5" wid="myRange" v-model="pagesize">{{pagesize}}</h2>
-    </div>
-    <md-button  class="md-raised" :disabled="page===0" @click="pagePrecedente()">Précédent</md-button>&nbsp;&nbsp;
-    <md-button  class="md-raised" :disabled="page===nbpageTotal" @click="pageSuivante()">Suivant</md-button>
+                <md-field>
+                    <label>Cuisine :</label>
+                        <md-input type="text" required v-model="cuisine"></md-input>
+                    
+                </md-field>
+            <md-button class="md-raised">Ajouter</md-button>
+        </form>
     
+    
+        <h1>Nombre de restaurants : {{nbRestaurantTotal}}</h1>
+        
+            
+                <md-field :class="getValidationNom('nom')">
+                    <label>Chercher par nom: </label>
+                    <md-input @input="getRestaurantsFromServer()" type="text" v-model="nomRestoRechercher"></md-input>
+                   <!-- <span class="md-error" v-else-if="!$r.nom">Nom invalid</span>>-->
+                </md-field>
+        
+        <p>NB pages total : {{nbpageTotal}}</p>
+        
+            <div class="slidecontainer">
+                <h2>Nombre de resto: 
+                    
+                    <input 
+                        @input="getRestaurantsFromServer()"
+                        type="range" min="5" max="100" value="50" class="slider" step="5" wid="myRange" v-model="pagesize">{{pagesize}}</h2>
+            </div>
+    
+        <md-button  class="md-raised" :disabled="page===0" @click="pagePrecedente()">Précédent</md-button>&nbsp;&nbsp;
+        <md-button  class="md-raised" :disabled="page===nbpageTotal" @click="pageSuivante()">Suivant</md-button>
+    </div>
     <md-table v-model="restaurants" md-sort="name" md-sort-order="asc">
         <md-table-row>
             <md-table-head >Nom</md-table-head>
             <md-table-head>Cuisine </md-table-head>
+            <md-table-head>Ville </md-table-head>
             <md-table-head>Actions </md-table-head>
             <md-table-head>Supression restaurant</md-table-head>
         </md-table-row>
@@ -50,6 +56,7 @@
 
                 <md-table-cell md-label="Name" md-sort-by="name">{{r.name}}</md-table-cell>
                 <md-table-cell md-label="Cuisine" md-sort-by="cuisine"> {{r.cuisine}}</md-table-cell>
+                <md-table-cell md-label="Ville" md-sort-by="ville">{{r.borough}}</md-table-cell>
                 <md-table-cell md-label="Router">
                     <router-link :to="'/Restaurant/'+r._id">[Restaurant]</router-link>
                 </md-table-cell>
@@ -82,6 +89,14 @@ export default {
             this.getRestaurantsFromServer();
         },
         methods: {
+            getValidationNom(fieldName){
+                const field = this.$r.name[fieldName]
+                if(field){
+                    return{
+                        'md-invalid':field.$invalid && field.$dirty
+                    }
+                }
+            },
             pagePrecedente(){
                 if(this.page === 0 ) return;
                 this.page--;
@@ -186,8 +201,9 @@ input:valid {
 .slider{
     width: 100%;
 }
-.md-field .md-input{
-    align-content: center;
-    align-items: center;
+div .formulaire{
+    display:block;
+    width: 50%;
 }
+
 </style>

@@ -18,7 +18,7 @@ Vue.use(VueRouter)
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyDXwoI_V9Nfd57uZs_T6AInx23xrpNiCT4',
-    libraries:'places',// a remplacer
+    libraries:'places',// a remplacer par le nom des restos 
   }
 });
 

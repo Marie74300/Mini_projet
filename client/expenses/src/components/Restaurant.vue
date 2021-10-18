@@ -5,8 +5,9 @@
         <ul>
             <li>Nom: {{restaurant.name}}</li>
             <li>Cuisine: {{restaurant.cuisine}}</li>
+            <li>Rue: {{restaurant.address.street}}</li>
             <li>Ville: {{restaurant.borough}}</li>
-
+            
         </ul>
     </div>
 </template>
