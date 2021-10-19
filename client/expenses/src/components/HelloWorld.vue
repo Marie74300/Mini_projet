@@ -1,7 +1,10 @@
 <template>
  <div id="HelloWorld">
+    <h1>Nombre de restaurants : {{nbRestaurantTotal}}</h1>
     <h2>{{msg}}</h2>>
+
     <div class="formulaire">
+        <h2>Ajouter un restaurant</h2>
         <form @submit="ajouterRestaurant">
                 <md-field>
                     <label>Nom : </label>
@@ -17,10 +20,12 @@
         </form>
     
     
-        <h1>Nombre de restaurants : {{nbRestaurantTotal}}</h1>
         
-            
-                <md-field :class="getValidationNom('nom')">
+        <h1>Rechercher un restaurant</h1>
+
+            <!--:class="getValidationNom('nom')"-->
+
+                <md-field >
                     <label>Chercher par nom: </label>
                     <md-input @input="getRestaurantsFromServer()" type="text" v-model="nomRestoRechercher"></md-input>
                    <!-- <span class="md-error" v-else-if="!$r.nom">Nom invalid</span>>-->
@@ -89,14 +94,14 @@ export default {
             this.getRestaurantsFromServer();
         },
         methods: {
-            getValidationNom(fieldName){
+            /*getValidationNom(fieldName){
                 const field = this.$r.name[fieldName]
                 if(field){
                     return{
                         'md-invalid':field.$invalid && field.$dirty
                     }
                 }
-            },
+            },*/
             pagePrecedente(){
                 if(this.page === 0 ) return;
                 this.page--;

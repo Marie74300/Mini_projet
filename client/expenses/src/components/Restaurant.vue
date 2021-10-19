@@ -9,6 +9,14 @@
             <li>Ville: {{restaurant.borough}}</li>
             
         </ul>
+        <GmapMap
+            :center="recupCoord()"
+            :zoom='12'
+            
+            style='width:100%;  height: 400px;'
+            
+        />
+        
     </div>
 </template>
 
@@ -26,8 +34,11 @@ export default {
     },
     data: function(){
         return{
-            restaurant:null
+            restaurant:null, 
+            center: { lat:46.07147 , lng: 6.55944 },
+            
         }
+
     },
     mounted(){
         console.log("Avant affichage, on pourra faire un fetch");
@@ -43,7 +54,31 @@ export default {
             })
     },
     methods:{
+
+        geolocate: function() {
+           
+        navigator.geolocation.getCurrentPosition(position => {
+            this.center = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            };
+        });
         
+        },
+        addMarker() {
+        
+        },
+        recupCoord(){
+            const coord = ""+this.restaurant.address.coord;
+            console.log("coordonnées"+coord);
+            var splitcoord = coord.split(",");
+
+            var latcoord = splitcoord[0];
+            var longcoord = splitcoord[1];
+            console.log("latitude: "+latcoord+","+"longitude:"+longcoord);
+
+            return "{ lat:"+latcoord+", lng:"+longcoord+"}";
+        },
     }
 };
 </script>
