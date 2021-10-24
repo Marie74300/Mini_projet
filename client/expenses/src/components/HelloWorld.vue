@@ -23,12 +23,18 @@
         
         <h1>Rechercher un restaurant</h1>
 
-            <!--:class="getValidationNom('nom')"-->
+            
 
-                <md-field >
+                <md-field>
                     <label>Chercher par nom: </label>
                     <md-input @input="getRestaurantsFromServer()" type="text" v-model="nomRestoRechercher"></md-input>
-                   <!-- <span class="md-error" v-else-if="!$r.nom">Nom invalid</span>>-->
+                    <md-snackbar
+                        :md-position="position"
+                        :md-duration="4000"
+                        :md-active.sync="showSnackbar"
+                        md-persistent>
+                        <span class="md-error" >Erreur: Nom introuvable dans la base de données</span>
+                    </md-snackbar>
                 </md-field>
         
         <p>NB pages total : {{nbpageTotal}}</p>
@@ -40,10 +46,10 @@
                         @input="getRestaurantsFromServer()"
                         type="range" min="5" max="100" value="50" class="slider" step="5" wid="myRange" v-model="pagesize">{{pagesize}}</h2>
             </div>
-    
+    </div>
         <md-button  class="md-raised" :disabled="page===0" @click="pagePrecedente()">Précédent</md-button>&nbsp;&nbsp;
         <md-button  class="md-raised" :disabled="page===nbpageTotal" @click="pageSuivante()">Suivant</md-button>
-    </div>
+    
     <md-table v-model="restaurants" md-sort="name" md-sort-order="asc">
         <md-table-row>
             <md-table-head >Nom</md-table-head>
@@ -94,14 +100,15 @@ export default {
             this.getRestaurantsFromServer();
         },
         methods: {
-            /*getValidationNom(fieldName){
-                const field = this.$r.name[fieldName]
+            getValidationNom(fieldName){
+                const field = this.$r.nom[fieldName]
+                console.log(field);
                 if(field){
                     return{
                         'md-invalid':field.$invalid && field.$dirty
                     }
                 }
-            },*/
+            },
             pagePrecedente(){
                 if(this.page === 0 ) return;
                 this.page--;
@@ -122,6 +129,9 @@ export default {
                     .then((responseJson) => { // arrow functions conserve le bon this 
                         responseJson.json().then((resJS)=> {
                             //res est un obj JS
+                            if(resJS.count==0){
+                                this.showSnackbar=true;
+                            }
                             this.restaurants = resJS.data;
                             this.nbRestaurantTotal = resJS.count;
                             this.nbpageTotal = Math.round(
@@ -165,7 +175,7 @@ export default {
                 this.cuisine = "";
             },
             getColor(index) {
-                return (index % 2) ? 'lightBlue' : 'pink';
+                return (index % 2) ? 'lightBlue' : 'white';
             }
         }
 }
@@ -182,14 +192,16 @@ table {
 tr,
 td {
     border: 1px solid black;
+    
 }
 
 td {
     padding: 5px;
+    
 }
 
 tr:hover {
-    background-color: yellow;
+    background-color: grey;
 }
 input:invalid {
     background-color: pink;
@@ -200,7 +212,7 @@ input:valid {
 }
 
 .bordureRouge {
-    border: 2px dashed red;
+    border: 2px dashed;
 }
 
 .slider{

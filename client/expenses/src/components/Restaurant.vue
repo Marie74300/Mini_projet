@@ -10,12 +10,18 @@
             
         </ul>
         <GmapMap
-            :center="recupCoord()"
-            :zoom='12'
-            
+            :center='center'
+            :zoom='8'
             style='width:100%;  height: 400px;'
             
-        />
+        >
+        <GmapMarker
+            :key="index"
+             
+            :position="recupCoord()"
+            
+            />
+        </GmapMap>
         
     </div>
 </template>
@@ -35,22 +41,24 @@ export default {
     data: function(){
         return{
             restaurant:null, 
-            center: { lat:46.07147 , lng: 6.55944 },
-            
+            center: { lat:120 , lng: 120},
+            markers: [],
+            currentPlace: null,
         }
 
     },
-    mounted(){
+     async mounted(){
         console.log("Avant affichage, on pourra faire un fetch");
         console.log("ID="+this.id);
         let url = "http://localhost:8080/api/restaurants/"+this.id;
-
-        fetch(url)
+        
+         fetch(url)
             .then(response => {
                 return response.json();
             }).then(data => {
-                console.log(data.restaurant.name);
+                console.log(data.restaurant.nom);
                 this.restaurant=data.restaurant;
+                
             })
     },
     methods:{
@@ -65,9 +73,7 @@ export default {
         });
         
         },
-        addMarker() {
         
-        },
         recupCoord(){
             const coord = ""+this.restaurant.address.coord;
             console.log("coordonnées"+coord);
@@ -76,8 +82,9 @@ export default {
             var latcoord = splitcoord[0];
             var longcoord = splitcoord[1];
             console.log("latitude: "+latcoord+","+"longitude:"+longcoord);
+            this.center={lat: parseFloat(latcoord), lng : parseFloat(longcoord)};
+            
 
-            return "{ lat:"+latcoord+", lng:"+longcoord+"}";
         },
     }
 };
