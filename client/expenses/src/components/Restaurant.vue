@@ -9,16 +9,16 @@
             <li>Ville: {{restaurant.borough}}</li>
             
         </ul>
+        <button @click='addMarker()'/>
         <GmapMap
             :center='center'
             :zoom='8'
             style='width:100%;  height: 400px;'
-            
         >
         <GmapMarker
-            :key="index"
-             
+            :key="key" 
             :position="recupCoord()"
+            :clickable="false"
             
             />
         </GmapMap>
@@ -42,7 +42,6 @@ export default {
         return{
             restaurant:null, 
             center: { lat:120 , lng: 120},
-            markers: [],
             currentPlace: null,
         }
 
@@ -73,7 +72,7 @@ export default {
         });
         
         },
-        
+       
         recupCoord(){
             const coord = ""+this.restaurant.address.coord;
             console.log("coordonnées"+coord);
@@ -85,6 +84,24 @@ export default {
             this.center={lat: parseFloat(latcoord), lng : parseFloat(longcoord)};
             
 
+        },
+
+        addMarker() {
+        const coord = ""+this.restaurant.address.coord;
+            console.log("coordonnées"+coord);
+            var splitcoord = coord.split(",");
+
+            var latcoord = splitcoord[0];
+            var longcoord = splitcoord[1];
+
+        const marker = {
+          lat: parseFloat(latcoord),
+          lng: parseFloat(longcoord),
+        }
+        this.markers.push({ position: marker });
+        //this.places.push(this.currentPlace);
+        this.center = marker;
+      
         },
     }
 };
