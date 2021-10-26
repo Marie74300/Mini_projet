@@ -9,18 +9,16 @@
             <li>Ville: {{restaurant.borough}}</li>
             
         </ul>
-        <button @click='addMarker()'/>
+        
         <GmapMap
             :center='center'
             :zoom='8'
             style='width:100%;  height: 400px;'
         >
         <GmapMarker
-            :key="key" 
-            :position="recupCoord()"
-            :clickable="false"
-            
-            />
+            :position='center'
+          />
+       
         </GmapMap>
         
     </div>
@@ -28,8 +26,10 @@
 
 
 <script>
+
 export default {
     name:"Restaurant",
+  
     props:{
         
     },
@@ -42,67 +42,42 @@ export default {
         return{
             restaurant:null, 
             center: { lat:120 , lng: 120},
-            currentPlace: null,
         }
 
     },
+   
      async mounted(){
         console.log("Avant affichage, on pourra faire un fetch");
         console.log("ID="+this.id);
-        let url = "http://localhost:8080/api/restaurants/"+this.id;
+        await this.fetchResto(this.id);
         
-         fetch(url)
-            .then(response => {
-                return response.json();
-            }).then(data => {
-                console.log(data.restaurant.nom);
-                this.restaurant=data.restaurant;
-                
-            })
+            
     },
     methods:{
-
-        geolocate: function() {
-           
-        navigator.geolocation.getCurrentPosition(position => {
-            this.center = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            };
-        });
+         async fetchResto(id){
+        let url = "http://localhost:8080/api/restaurants/"+id;
         
-        },
+           await fetch(url)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data.restaurant.nom);
+                this.restaurant=data.restaurant;
+               this.recupCoord();
+            })
+    },
        
         recupCoord(){
             const coord = ""+this.restaurant.address.coord;
-            console.log("coordonnées"+coord);
             var splitcoord = coord.split(",");
 
             var latcoord = splitcoord[0];
             var longcoord = splitcoord[1];
             console.log("latitude: "+latcoord+","+"longitude:"+longcoord);
             this.center={lat: parseFloat(latcoord), lng : parseFloat(longcoord)};
-            
 
-        },
-
-        addMarker() {
-        const coord = ""+this.restaurant.address.coord;
-            console.log("coordonnées"+coord);
-            var splitcoord = coord.split(",");
-
-            var latcoord = splitcoord[0];
-            var longcoord = splitcoord[1];
-
-        const marker = {
-          lat: parseFloat(latcoord),
-          lng: parseFloat(longcoord),
         }
-        this.markers.push({ position: marker });
-        //this.places.push(this.currentPlace);
-        this.center = marker;
-      
-        },
     }
 };
 </script>

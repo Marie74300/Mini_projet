@@ -29,7 +29,6 @@
                     <label>Chercher par nom: </label>
                     <md-input @input="getRestaurantsFromServer()" type="text" v-model="nomRestoRechercher"></md-input>
                     <md-snackbar
-                        :md-position="position"
                         :md-duration="4000"
                         :md-active.sync="showSnackbar"
                         md-persistent>
