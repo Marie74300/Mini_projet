@@ -1,43 +1,59 @@
 <template>
  <div id="HelloWorld">
-    <h2>{{msg}}</h2>
-    <form @submit="ajouterRestaurant">
-            <md-field>
-                <label>Nom : </label>
-                    <md-input type="text"  required v-model="nom"></md-input>
-            </md-field>
-       
-            <md-field>
-                <label>Cuisine :</label>
-                     <md-input type="text" required v-model="cuisine"></md-input>
-                
-            </md-field>
-        <md-button class="md-raised">Ajouter</md-button>
-    </form>
-
     <h1>Nombre de restaurants : {{nbRestaurantTotal}}</h1>
+    <h2>{{msg}}</h2>>
+
+    <div class="formulaire">
+        <h2>Ajouter un restaurant</h2>
+        <form @submit="ajouterRestaurant">
+                <md-field>
+                    <label>Nom : </label>
+                        <md-input type="text"  required v-model="nom"></md-input>
+                </md-field>
+        
+                <md-field>
+                    <label>Cuisine :</label>
+                        <md-input type="text" required v-model="cuisine"></md-input>
+                    
+                </md-field>
+            <md-button class="md-raised">Ajouter</md-button>
+        </form>
+    
     
         
-            <md-field>
-                <label>Chercher par nom: </label>
-                <md-input @input="getRestaurantsFromServer()" type="text" v-model="nomRestoRechercher"></md-input>
-            </md-field>
+        <h1>Rechercher un restaurant</h1>
+
             
-    <p>NB pages total : {{nbpageTotal}}</p>
-    <div class="slidecontainer">
-        <h2>Nombre de resto: 
-            
-            <input 
-                @input="getRestaurantsFromServer()"
-                type="range" min="5" max="100" value="50" class="slider" step="5" wid="myRange" v-model="pagesize">{{pagesize}}</h2>
+
+                <md-field>
+                    <label>Chercher par nom: </label>
+                    <md-input @input="getRestaurantsFromServer()" type="text" v-model="nomRestoRechercher"></md-input>
+                    <md-snackbar
+                        :md-duration="4000"
+                        :md-active.sync="showSnackbar"
+                        md-persistent>
+                        <span class="md-error" >Erreur: Nom introuvable dans la base de données</span>
+                    </md-snackbar>
+                </md-field>
+        
+        <p>NB pages total : {{nbpageTotal}}</p>
+        
+            <div class="slidecontainer">
+                <h2>Nombre de resto: 
+                    
+                    <input 
+                        @input="getRestaurantsFromServer()"
+                        type="range" min="5" max="100" value="50" class="slider" step="5" wid="myRange" v-model="pagesize">{{pagesize}}</h2>
+            </div>
     </div>
-    <md-button  class="md-raised" :disabled="page===0" @click="pagePrecedente()">Précédent</md-button>&nbsp;&nbsp;
-    <md-button  class="md-raised" :disabled="page===nbpageTotal" @click="pageSuivante()">Suivant</md-button>
+        <md-button  class="md-raised" :disabled="page===0" @click="pagePrecedente()">Précédent</md-button>&nbsp;&nbsp;
+        <md-button  class="md-raised" :disabled="page===nbpageTotal" @click="pageSuivante()">Suivant</md-button>
     
     <md-table v-model="restaurants" md-sort="name" md-sort-order="asc">
         <md-table-row>
             <md-table-head >Nom</md-table-head>
             <md-table-head>Cuisine </md-table-head>
+            <md-table-head>Ville </md-table-head>
             <md-table-head>Actions </md-table-head>
             <md-table-head>Supression restaurant</md-table-head>
         </md-table-row>
@@ -50,6 +66,7 @@
 
                 <md-table-cell md-label="Name" md-sort-by="name">{{r.name}}</md-table-cell>
                 <md-table-cell md-label="Cuisine" md-sort-by="cuisine"> {{r.cuisine}}</md-table-cell>
+                <md-table-cell md-label="Ville" md-sort-by="ville">{{r.borough}}</md-table-cell>
                 <md-table-cell md-label="Router">
                     <router-link :to="'/Restaurant/'+r._id">[Restaurant]</router-link>
                 </md-table-cell>
@@ -82,6 +99,15 @@ export default {
             this.getRestaurantsFromServer();
         },
         methods: {
+            getValidationNom(fieldName){
+                const field = this.$r.nom[fieldName]
+                console.log(field);
+                if(field){
+                    return{
+                        'md-invalid':field.$invalid && field.$dirty
+                    }
+                }
+            },
             pagePrecedente(){
                 if(this.page === 0 ) return;
                 this.page--;
@@ -102,6 +128,9 @@ export default {
                     .then((responseJson) => { // arrow functions conserve le bon this 
                         responseJson.json().then((resJS)=> {
                             //res est un obj JS
+                            if(resJS.count==0){
+                                this.showSnackbar=true;
+                            }
                             this.restaurants = resJS.data;
                             this.nbRestaurantTotal = resJS.count;
                             this.nbpageTotal = Math.round(
@@ -145,7 +174,7 @@ export default {
                 this.cuisine = "";
             },
             getColor(index) {
-                return (index % 2) ? 'lightBlue' : 'pink';
+                return (index % 2) ? 'lightBlue' : 'white';
             }
         }
 }
@@ -162,14 +191,16 @@ table {
 tr,
 td {
     border: 1px solid black;
+    
 }
 
 td {
     padding: 5px;
+    
 }
 
 tr:hover {
-    background-color: yellow;
+    background-color: grey;
 }
 input:invalid {
     background-color: pink;
@@ -180,13 +211,15 @@ input:valid {
 }
 
 .bordureRouge {
-    border: 2px dashed red;
+    border: 2px dashed;
 }
 
 .slider{
     width: 100%;
 }
-md-field{
-    width:50%;
+div .formulaire{
+    display:block;
+    width: 50%;
 }
+
 </style>
