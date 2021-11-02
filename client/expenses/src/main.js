@@ -7,9 +7,9 @@ import 'vue-material/dist/theme/default.css'
 import VueRouter from 'vue-router'
 
 //imports components
-import HelloWorld from './components/HelloWorld.vue'
-import Newcompo from './components/Newcompo.vue'
 import Restaurant from './components/Restaurant.vue'
+import Newcompo from './components/Newcompo.vue'
+import DetailRestaurant from './components/DetailRestaurant.vue'
 import GoogleMap from './components/GoogleMap.vue'
 
 Vue.config.productionTip = false
@@ -26,7 +26,7 @@ const router = new VueRouter({
   routes:[
     {
       path:'/',
-      component:HelloWorld,
+      component:Restaurant,
     },
     {
       path:'/Newcompo',
@@ -37,7 +37,7 @@ const router = new VueRouter({
     },
     {
       path:'/Restaurant/:id',
-      component:Restaurant,
+      component:DetailRestaurant,
       props:{
 
       }

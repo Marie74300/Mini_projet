@@ -1,87 +1,225 @@
 <template>
-    <div id="Restaurant">
-        <h1>Detail d'un restau qui a pour id :{{id}}</h1>
+ <div id="NbResto">
+    <h1>Nombre de restaurants : {{nbRestaurantTotal}}</h1>
+    <h2>{{msg}}</h2>>
 
-        <ul>
-            <li>Nom: {{restaurant.name}}</li>
-            <li>Cuisine: {{restaurant.cuisine}}</li>
-            <li>Rue: {{restaurant.address.street}}</li>
-            <li>Ville: {{restaurant.borough}}</li>
+    <div class="formulaire">
+        <h2>Ajouter un restaurant</h2>
+        <form @submit="ajouterRestaurant">
+                <md-field>
+                    <label>Nom : </label>
+                        <md-input type="text"  required v-model="nom"></md-input>
+                </md-field>
+        
+                <md-field>
+                    <label>Cuisine :</label>
+                        <md-input type="text" required v-model="cuisine"></md-input>
+                    
+                </md-field>
+            <md-button class="md-raised">Ajouter</md-button>
+        </form>
+    
+    
+        
+        <h1>Rechercher un restaurant</h1>
+
             
-        </ul>
+
+                <md-field>
+                    <label>Chercher par nom: </label>
+                    <md-input @input="getRestaurantsFromServer()" type="text" v-model="nomRestoRechercher"></md-input>
+                    <md-snackbar
+                        :md-duration="4000"
+                        :md-active.sync="showSnackbar"
+                        md-persistent>
+                        <span class="md-error" >Erreur: Nom introuvable dans la base de données</span>
+                    </md-snackbar>
+                </md-field>
         
-        <GmapMap
-            :center='center'
-            :zoom='8'
-            style='width:100%;  height: 400px;'
-        >
-        <GmapMarker
-            :position='center'
-          />
-       
-        </GmapMap>
+        <p>NB pages total : {{nbpageTotal}}</p>
         
+            <div class="slidecontainer">
+                <h2>Nombre de resto: 
+                    
+                    <input 
+                        @input="getRestaurantsFromServer()"
+                        type="range" min="5" max="100" value="50" class="slider" step="5" wid="myRange" v-model="pagesize">{{pagesize}}</h2>
+            </div>
     </div>
+        <md-button  class="md-raised" :disabled="page===0" @click="pagePrecedente()">Précédent</md-button>&nbsp;&nbsp;
+        <md-button  class="md-raised" :disabled="page===nbpageTotal" @click="pageSuivante()">Suivant</md-button>
+    
+    <md-table v-model="restaurants" md-sort="name" md-sort-order="asc">
+        <md-table-row>
+            <md-table-head >Nom</md-table-head>
+            <md-table-head>Cuisine </md-table-head>
+            <md-table-head>Ville </md-table-head>
+            <md-table-head>Actions </md-table-head>
+            <md-table-head>Supression restaurant</md-table-head>
+        </md-table-row>
+        
+            <md-table-row v-bind:key="index" v-for="r,index in restaurants" 
+            @click="supprimerRestaurant(index)"
+            :style="{backgroundColor:getColor(index)}"
+            :class="{bordureRouge:(index === 2)}"
+            >
+
+                <md-table-cell md-label="Name" md-sort-by="name">{{r.name}}</md-table-cell>
+                <md-table-cell md-label="Cuisine" md-sort-by="cuisine"> {{r.cuisine}}</md-table-cell>
+                <md-table-cell md-label="Ville" md-sort-by="ville">{{r.borough}}</md-table-cell>
+                <md-table-cell md-label="Router">
+                    <router-link :to="'/Restaurant/'+r._id">[DetailRestaurant]</router-link>
+                </md-table-cell>
+                <md-table-cell><md-button class="md-raised" @click="supprimerRestaurant()">Supprimer le restaurant</md-button></md-table-cell>
+            </md-table-row>
+        
+    </md-table>
+  </div>
 </template>
 
-
 <script>
-
+import _ from "lodash"
 export default {
-    name:"Restaurant",
-  
-    props:{
+  name: 'Restaurant',
         
-    },
-    computed:{
-        id(){
-            return this.$route.params.id;
-        }
-    },
-    data: function(){
-        return{
-            restaurant:null, 
-            center: { lat:120 , lng: 120},
-        }
-
-    },
-   
-     async mounted(){
-        console.log("Avant affichage, on pourra faire un fetch");
-        console.log("ID="+this.id);
-        await this.fetchResto(this.id);
+        data: function(){return{
+            restaurants: [],
+            nom: '',
+            cuisine: '',
+            nbRestaurantTotal:0,
+            page:0,
+            pagesize:10,
+            nbpageTotal:0,
+            msg:"",
+            nomRestoRechercher:"",
         
-            
-    },
-    methods:{
-         async fetchResto(id){
-        let url = "http://localhost:8080/api/restaurants/"+id;
-        
-           await fetch(url)
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                console.log(data.restaurant.nom);
-                this.restaurant=data.restaurant;
-               this.recupCoord();
-            })
-    },
-       
-        recupCoord(){
-            const coord = ""+this.restaurant.address.coord;
-            var splitcoord = coord.split(",");
+        }},
+        mounted(){
+            console.log("AVANT RENDU HTML");
+            this.getRestaurantsFromServer();
+        },
+        methods: {
+            getValidationNom(fieldName){
+                const field = this.$r.nom[fieldName]
+                console.log(field);
+                if(field){
+                    return{
+                        'md-invalid':field.$invalid && field.$dirty
+                    }
+                }
+            },
+            pagePrecedente(){
+                if(this.page === 0 ) return;
+                this.page--;
+                this.getRestaurantsFromServer();
+            },
+            pageSuivante(){
+                if(this.page === this.dernierepage) return;
+                this.page++;
+                this.getRestaurantsFromServer();
+            },
+            getRestaurantsFromServer(){
+                let url = "http://localhost:8080/api/restaurants?";
+                url += "page=" + this.page;
+                url += "&pagesize="+this.pagesize;
+                url += "&name=" + this.nomRestoRechercher;
 
-            var latcoord = splitcoord[0];
-            var longcoord = splitcoord[1];
-            console.log("latitude: "+latcoord+","+"longitude:"+longcoord);
-            this.center={lat: parseFloat(latcoord), lng : parseFloat(longcoord)};
+                fetch(url)
+                    .then((responseJson) => { // arrow functions conserve le bon this 
+                        responseJson.json().then((resJS)=> {
+                            //res est un obj JS
+                            if(resJS.count==0){
+                                this.showSnackbar=true;
+                            }
+                            this.restaurants = resJS.data;
+                            this.nbRestaurantTotal = resJS.count;
+                            this.nbpageTotal = Math.round(
+                                this.nbRestaurantTotal/this.pagesize);
 
+                        });
+                    })
+                    .catch(function(err){
+                        console.log(err);
+                    })
+
+            },
+            chercherRestaurants: _.debounce(function(){
+                this.getRestaurantsFromServer();
+            },300),
+            supprimerRestaurant(index) {
+                this.restaurants.splice(index, 1);
+            },
+            ajouterRestaurant($event) {
+                // eviter le comportement par defaut
+                let form = $event.target();
+                let donneesFrom= new FormData(form);
+                let url="http://localhost:8080/api/restaurants?";
+                fetch(url,{
+                    method:"POST",
+                    body: donneesFrom,
+                })
+                    .then((responseJson)=>{
+                        responseJson.json().then((resJS)=>{
+                            console.log(resJS.msg);
+                            this.msg = resJS.msg;
+                            this.getRestaurantsFromServer();
+                        });
+                    })
+                    .catch(function(err){
+                        console.log(err);
+                    });
+                
+
+                this.nom = "";
+                this.cuisine = "";
+            },
+            getColor(index) {
+                return (index % 2) ? 'lightBlue' : 'white';
+            }
         }
-    }
-};
+}
 </script>
 
+<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+table {
+    border: 1px solid black;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr,
+td {
+    border: 1px solid black;
+    
+}
+
+td {
+    padding: 5px;
+    
+}
+
+tr:hover {
+    background-color: grey;
+}
+input:invalid {
+    background-color: pink;
+}
+
+input:valid {
+    background-color: lightGreen;
+}
+
+.bordureRouge {
+    border: 2px dashed;
+}
+
+.slider{
+    width: 100%;
+}
+div .formulaire{
+    display:block;
+    width: 50%;
+}
 
 </style>

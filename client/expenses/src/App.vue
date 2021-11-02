@@ -3,7 +3,7 @@
     
     <router-link to="/">[Home]</router-link>
     <router-link to="/Newcompo">[Newcompo]</router-link>
-    <router-link to="/Restaurant">[Restaurant]</router-link>
+    <router-link to="/Restaurant">[DetailRestaurant]</router-link>
      <router-link to="/GoogleMap">[GoogleMap]</router-link>
     <router-view></router-view>
     
