@@ -1,0 +1,101 @@
+{
+    "carte_plats": [
+      {
+        "nom": "Salade césar",
+        "type":"plat",
+        "gastronomique":false,
+        "description": "Composée d'une salade verte, de morceaux de poulet et de croutons, parmesan ",
+        "photo":"/salade_cesar.jpeg",
+        "prix":"15.90"
+      },
+      {
+        "nom": "Pizza chèvre miel",
+        "type":"plat",
+        "gastronomique":false,
+        "description": "Pâte à pizza, sauce tomate, emmental râpé, chèvre, olives noires, miel liquide",
+        "photo":"/pizza_chevre_miel.jpeg",
+        "prix":"11.99"
+      },
+      {
+        "nom": "Brownie",
+        "type": "déssert",
+        "gastronomique":false,
+        "description": "gateau au chocolat avec morceaux de noisettes",
+        "photo":"/brownie.jpeg",
+        "prix":"6.70"
+      },
+      {
+        "nom": "Cafe gourmand",
+        "type": "déssert",
+        "gastronomique":false,
+        "description": "Cafe accompagné de miniardises, brownie, panacotta framboises et tarte pommes",
+        "photo":"/cafe_gourmand.jpeg",
+        "prix":"10.99"
+      },
+      {
+        "nom": "Terrine au comté",
+        "type": "hors d'oeuvre",
+        "gastronomique":false,
+        "description": "terrine de comté à la moutarde et curry accompagné de salade",
+        "photo":"/terrine_comte.webp",
+        "prix":"11.5"
+      },
+      {
+        "nom": "Soufflé au saumon",
+        "type": "hors d'oeuvre",
+        "gastronomique": false,
+        "description": "Soufflé au saumon safrané",
+        "photo":"/souffle_saumon.webp",
+        "prix":""
+      },
+      {
+        "nom": "Tartare de saumon",
+        "type":"hors d'oeuvre",
+        "gastronomique":true,
+        "description": "Pavé de saumon avec une sauce soja et herbes fraîches ",
+        "photo":"/tartare_saumon.jpeg",
+        "prix":""
+      },
+      {
+        "nom": "Homard grillé au champagne",
+        "type":"hors d'oeuvre",
+        "gastronomique":true,
+        "description": "homard a la sauce de champagne et beurre doux",
+        "photo":"/homard_grille.webp",
+        "prix":""
+      },
+      {
+        "nom": "Filet de perches à la meunière",
+        "type":"plat",
+        "gastronomique":true,
+        "description": "filets de perches avec sauce au beurre, persil et vin blanc accompagné de frites",
+        "photo":"/filets_perches.jpg",
+        "prix":"22.50"
+      },
+      {
+        "nom": "Pâtes au foie gras et truffes",
+        "type":"plat",
+        "gastronomique":true,
+        "description": "Tagliatelles fraiches au foie gras, magrets de canard, filets de truffes et basilics",
+        "photo":"/pates_truffes.webp",
+        "prix":"25"
+      },
+      {
+        "nom": "Millefeuille plume caramel de pâquerettes",
+        "type":"déssert",
+        "gastronomique":true,
+        "description": "Millefeuille au caramel ",
+        "photo":"/millefeuille.jpeg",
+        "prix":"12"
+      },
+      {
+        "nom": "Tarte au citron façon morito",
+        "type":"déssert",
+        "gastronomique":true,
+        "description":"Tarte au citron vert, menthe et rhum",
+        "photo":"/tarte_citron.jpeg",
+        "prix":"15"
+      }
+    ]
+
+}

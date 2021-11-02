@@ -43,6 +43,7 @@ const router = new VueRouter({
       }
 
     },
+    
     {
       path:'/GoogleMap',
       component:GoogleMap,

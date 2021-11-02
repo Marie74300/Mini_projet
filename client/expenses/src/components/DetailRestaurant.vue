@@ -3,13 +3,14 @@
         <h1>Detail d'un restau qui a pour id :{{id}}</h1>
 
         <ul>
-            <li>Nom: {{restaurant.name}}</li>
-            <li>Cuisine: {{restaurant.cuisine}}</li>
-            <li>Rue: {{restaurant.address.street}}</li>
-            <li>Ville: {{restaurant.borough}}</li>
+            <li><b>Nom:</b> {{restaurant.name}}</li>
+            <li><b>Cuisine:</b> {{restaurant.cuisine}}</li>
+            <li><b>Rue:</b> {{restaurant.address.street}}</li>
+            <li><b>Ville:</b> {{restaurant.borough}}</li>
+           
             
         </ul>
-        
+        <carte-des-plats/> 
         <GmapMap
             :center='center'
             :zoom='8'
@@ -26,12 +27,18 @@
 
 
 <script>
+import CarteDesPlats from './CarteDesPlats.vue';
+
 
 export default {
+    
     name:"DetailRestaurant",
   
     props:{
         
+    },
+    components:{
+        CarteDesPlats,
     },
     computed:{
         id(){
