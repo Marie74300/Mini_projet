@@ -1,8 +1,9 @@
 <template>
  <div id="NbResto">
+     <!--affiche le nombre de restaurants dans la base de données-->
     <h1>Nombre de restaurants : {{nbRestaurantTotal}}</h1>
     <h2>{{msg}}</h2>>
-
+    <!--Affiche le formulaire permettant d'ajouter un restaurant -->
     <div class="formulaire">
         <h2>Ajouter un restaurant</h2>
         <form @submit="ajouterRestaurant">
@@ -20,22 +21,20 @@
         </form>
     
     
-        
+        <!--affiche une barre de recherche ainsi que d'une snackbar permettant d'afficher une erreur si restaurant n'est pas trouver dans la bdd-->
         <h1>Rechercher un restaurant</h1>
 
-            
-
-                <md-field>
-                    <label>Chercher par nom: </label>
-                    <md-input @input="getRestaurantsFromServer()" type="text" v-model="nomRestoRechercher"></md-input>
-                    <md-snackbar
-                        :md-duration="4000"
-                        :md-active.sync="showSnackbar"
-                        md-persistent>
-                        <span class="md-error" >Erreur: Nom introuvable dans la base de données</span>
-                    </md-snackbar>
-                </md-field>
-        
+            <md-field>
+                <label>Chercher par nom: </label>
+                <md-input @input="getRestaurantsFromServer()" type="text" v-model="nomRestoRechercher"></md-input>
+                <md-snackbar
+                    :md-duration="4000"
+                    :md-active.sync="showSnackbar"
+                    md-persistent>
+                    <span class="md-error" >Erreur: Nom introuvable dans la base de données</span>
+                </md-snackbar>
+            </md-field>
+        <!--Permet de filtrer le nombre de restaurants afficher par page du tableau -->
         <p>NB pages total : {{nbpageTotal}}</p>
         
             <div class="slidecontainer">
@@ -46,6 +45,8 @@
                         type="range" min="5" max="100" value="50" class="slider" step="5" wid="myRange" v-model="pagesize">{{pagesize}}</h2>
             </div>
     </div>
+
+
         <md-button  class="md-raised" :disabled="page===0" @click="pagePrecedente()">Précédent</md-button>&nbsp;&nbsp;
         <md-button  class="md-raised" :disabled="page===nbpageTotal" @click="pageSuivante()">Suivant</md-button>
     
@@ -74,7 +75,7 @@
             </md-table-row>
         
     </md-table>
-  </div>
+</div>
 </template>
 
 <script>

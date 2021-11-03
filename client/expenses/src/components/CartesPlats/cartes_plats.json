@@ -5,7 +5,7 @@
         "type":"plat",
         "gastronomique":false,
         "description": "Composée d'une salade verte, de morceaux de poulet et de croutons, parmesan ",
-        "photo":"/salade_cesar.jpeg",
+        "photo":"https://assets.afcdn.com/recipe/20190704/94709_w1024h768c1cx3000cy2000.jpg",
         "prix":"15.90"
       },
       {
@@ -13,23 +13,23 @@
         "type":"plat",
         "gastronomique":false,
         "description": "Pâte à pizza, sauce tomate, emmental râpé, chèvre, olives noires, miel liquide",
-        "photo":"/pizza_chevre_miel.jpeg",
+        "photo":"https://img.cuisineaz.com/660x660/2016/04/28/i18089-pizza-chevre-miel.jpg",
         "prix":"11.99"
       },
       {
         "nom": "Brownie",
-        "type": "déssert",
+        "type": "dessert",
         "gastronomique":false,
         "description": "gateau au chocolat avec morceaux de noisettes",
-        "photo":"/brownie.jpeg",
+        "photo":"https://www.hervecuisine.com/wp-content/uploads/2015/10/brownies.jpg",
         "prix":"6.70"
       },
       {
         "nom": "Cafe gourmand",
-        "type": "déssert",
+        "type": "dessert",
         "gastronomique":false,
         "description": "Cafe accompagné de miniardises, brownie, panacotta framboises et tarte pommes",
-        "photo":"/cafe_gourmand.jpeg",
+        "photo":"https://www.picard.fr/dw/image/v2/AAHV_PRD/on/demandware.static/-/Sites-catalog-picard/default/dwd94f5f14/produits/000000000000082240_E1.jpg?sw=672&sh=392",
         "prix":"10.99"
       },
       {
@@ -37,7 +37,7 @@
         "type": "hors d'oeuvre",
         "gastronomique":false,
         "description": "terrine de comté à la moutarde et curry accompagné de salade",
-        "photo":"/terrine_comte.webp",
+        "photo":".https://www.simpleetbon.com/system/recipes/photos/000/000/146/original/terrine_de_fromage_frais_legumes.jpg?1476895362",
         "prix":"11.5"
       },
       {
@@ -45,31 +45,31 @@
         "type": "hors d'oeuvre",
         "gastronomique": false,
         "description": "Soufflé au saumon safrané",
-        "photo":"/souffle_saumon.webp",
-        "prix":""
+        "photo":"https://www.francine.com/media/cache/recipe_big/uploads/media/recipe/0001/04/bd7f760c9fa841b27c14a83baec3a4d3c881baa1.jpeg",
+        "prix":"12.5"
       },
       {
         "nom": "Tartare de saumon",
         "type":"hors d'oeuvre",
         "gastronomique":true,
         "description": "Pavé de saumon avec une sauce soja et herbes fraîches ",
-        "photo":"/tartare_saumon.jpeg",
-        "prix":""
+        "photo":"https://cdn.pratico-pratiques.com/app/uploads/sites/4/2018/08/30183150/tartare-de-saumon-classique.jpeg",
+        "prix":"14"
       },
       {
         "nom": "Homard grillé au champagne",
         "type":"hors d'oeuvre",
         "gastronomique":true,
         "description": "homard a la sauce de champagne et beurre doux",
-        "photo":"/homard_grille.webp",
-        "prix":""
+        "photo":"https://img.cuisineaz.com/660x660/2016/04/28/i94428-homard-grille-sabayon-au-champagne.webp",
+        "prix":"26"
       },
       {
         "nom": "Filet de perches à la meunière",
         "type":"plat",
         "gastronomique":true,
         "description": "filets de perches avec sauce au beurre, persil et vin blanc accompagné de frites",
-        "photo":"/filets_perches.jpg",
+        "photo":"https://www.mrcook.ch/wp-content/uploads/2016/05/20090623b.jpg.485x400_q85_crop_upscale.jpg",
         "prix":"22.50"
       },
       {
@@ -77,23 +77,23 @@
         "type":"plat",
         "gastronomique":true,
         "description": "Tagliatelles fraiches au foie gras, magrets de canard, filets de truffes et basilics",
-        "photo":"/pates_truffes.webp",
+        "photo":"https://img.cuisineaz.com/660x660/2016/10/23/i74501-pates-fraiches-au-foie-gras-aux-magrets-et-aux-truffes.jpg",
         "prix":"25"
       },
       {
         "nom": "Millefeuille plume caramel de pâquerettes",
-        "type":"déssert",
+        "type":"dessert",
         "gastronomique":true,
         "description": "Millefeuille au caramel ",
-        "photo":"/millefeuille.jpeg",
+        "photo":".https://i-reg.unimedias.fr/sites/art-de-vivre/files/styles/recipe/public/r40_mille-feuille-plue-caramel-paquerettes_bw.jpg?auto=compress%2Cformat&crop=faces%2Cedges&cs=srgb&fit=crop&h=500&w=393",
         "prix":"12"
       },
       {
         "nom": "Tarte au citron façon morito",
-        "type":"déssert",
+        "type":"dessert",
         "gastronomique":true,
         "description":"Tarte au citron vert, menthe et rhum",
-        "photo":"/tarte_citron.jpeg",
+        "photo":"https://www.citronetchocolat.fr/wp-content/uploads/2020/04/Tarte-Mojito-06-1920x1200.jpg",
         "prix":"15"
       }
     ]

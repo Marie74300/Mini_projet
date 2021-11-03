@@ -1,11 +1,55 @@
 <template>
     <div id="CarteDesPlats">
         <h1>Carte des plats du restaurants</h1>
-        <ul>
-            <li v-for="item in listegastrodessert" :key="item.plat">{{item.plat}}</li>
+       
+        <div v-for="item in carte" :key="item.plat">
+            <p>Nom: {{ item.nom }}</p>
+            <p>description{{item.description}}</p>
+        </div>
+        
+        
+        <div class="menus">
+            <div class="menuMidi">
+                <h1>Menu Midi </h1>
+                <p>Nom du hors d'oeuvre:   {{this.menumidi.hdoeuvre.nom}}</p>
+                <p>description: {{this.menumidi.hdoeuvre.description}}</p>
+                <p>prix: {{this.menumidi.hdoeuvre.prix}}</p>
+                <p><img width="400" height="500" :src="this.menumidi.hdoeuvre.photo" /></p>
+
+                <p>Nom du plat:   {{this.menumidi.plat.nom}}</p>
+                <p>description: {{this.menumidi.plat.description}}</p>
+                <p>prix: {{this.menumidi.plat.prix}}</p>
+                <p><img width="400" height="500" :src="this.menumidi.plat.photo" /></p>
+
+            <p>Nom du dessert:   {{this.menumidi.dessert.nom}}</p>
+                <p>description: {{this.menumidi.dessert.description}}</p>
+                <p>prix: {{this.menumidi.dessert.prix}}</p>
+                <p><img width="400" height="500" :src="this.menumidi.dessert.photo" /></p>
+            </div>    
+            <div class="menuGastro">
+                <h1>Menu Gastronomique </h1>
+                <p>Nom du hors d'oeuvre:   {{this.menugastro.hdoeuvre.nom}}</p>
+                <p>description: {{this.menugastro.hdoeuvre.description}}</p>
+                <p>prix: {{this.menugastro.hdoeuvre.prix}}</p>
+                <p><img width="400" height="500" :src="this.menugastro.hdoeuvre.photo" /></p>
+
+                <p>Nom du plat:   {{this.menugastro.plat.nom}}</p>
+                <p>description: {{this.menugastro.plat.description}}</p>
+                <p>prix: {{this.menugastro.plat.prix}}</p>
+                <p><img width="400" height="500" :src="this.menugastro.plat.photo" /></p>
+
+                <p>Nom du dessert:   {{this.menugastro.dessert.nom}}</p>
+                <p>description: {{this.menugastro.dessert.description}}</p>
+                <p>prix: {{this.menugastro.dessert.prix}}</p>
+                <p><img width="400" height="500" :src="this.menugastro.dessert.photo" /></p>
+                
+            </div>  
+        </div>  
             
-        </ul>
+        
     </div>
+   
+    
 </template>
 
 
@@ -26,41 +70,145 @@ export default {
           listemidiplats:[],
           listemidihdoeuvre:[],
           listemididessert:[],
+
+          listeplats:[],
+          listehdoeuvre:[],
+          listedessert:[],
           
-          
+          carte:[],
+          menugastro:[],
+          menumidi:[],
+          hdoeuvre:null,
+          dessert: null,
+          plat:null,
+
+          hdoeuvregastro:null,
+          dessertgastro: null,
+          platgastro:null,
+
+          hdoeuvremidi:null,
+          dessertmidi: null,
+          platmidi:null,
+
+          tmphdoeuvre:null,
+          tmpdessert: null,
+          tmpplat:null,
+        
         }
     },
     
     methods:{
         //Ajouter tous les plats, dessert, hors d'oeuvre dans les listes gastro ou midi correspondantes
-        AddintoList(){
+        AddintoListCategory(){
             this.plats.forEach((e) => {
-                if(e.type==='plat' && e.gastronomique==true){
-                    this.listegastroplats.push(e);
+                if(e.type==='plat' ){
+                    this.listeplats.push(e);
                 }
-                else if(e.type==="hors d'oeuvre" && e.gastronomique==true){
-                    this.listegastrohdoeuvre.push(e);
+                else if(e.type==="hors d'oeuvre" ){
+                    this.listehdoeuvre.push(e);
                 }
-                else if (e.type==="dessert" && e.gastronomique==true){
-                    this.listegastrodessert.push(e);
-                }
-                else if (e.type==='plat' && e.gastronomique==false){
-                    this.listemidiplats.push(e);
-                }
-                else if (e.type==="hors d'oeuvre" && e.gastronomique==false){
-                    this.listemidihdoeuvre.push(e);
-                }
-                else{
-                    this.listemididessert.push(e);
+                else if (e.type==="dessert"){
+                    this.listedessert.push(e);
                 }
                 
             });
         },
+        CreateCarte(){
+            //Ajout de x nb de plats, hors d'oeuvre et dessert aleatoire dans la carte 
+                for(let i=0; i<(parseInt(Math.random()*this.plats.length));i++){
+                        console.log("ouee je suis dedans poulette");
+                    
+                        let tmpplat = parseInt(Math.random()*this.listeplats.length);
+                        let tmphdoeuvre = parseInt(Math.random()*this.listehdoeuvre.length);
+                        let tmpdessert = parseInt(Math.random()*this.listedessert.length);
+
+                        this.plat=this.listeplats[tmpplat];
+                        this.hdoeuvre=this.listehdoeuvre[tmphdoeuvre];
+                        this.dessert=this.listedessert[tmpdessert];
+
+                        console.log(this.plat);
+                        console.log(this.hdoeuvre);
+                        console.log(this.dessert);
+
+                        this.carte={
+                            plat:this.plat,
+                            hdoeuvre:this.hdoeuvre,
+                            dessert:this.dessert
+                        }
+                    
+                    if(this.plat.gastronomique===true){
+                        console.log(this.plat.nom);
+                        this.listegastroplats.push(this.plat);
+                    }
+                    else{
+                        console.log(this.plat.nom);
+                        this.listemidiplats.push(this.plat);
+                    }
+
+                     if(this.hdoeuvre.gastronomique===true){
+                        this.listegastrohdoeuvre.push(this.hdoeuvre);
+                    }
+                    else {
+                        this.listemidihdoeuvre.push(this.hdoeuvre);
+                    }
+
+                     if(this.dessert.gastronomique===true){
+                        this.listegastrodessert.push(this.dessert);
+                    }
+                    else{
+                        this.listemididessert.push(this.dessert);
+                    }
+                }
+                
+                     
+            
+
+           
+
+        },
+        CreateMenu(gastronomique){
+           if(gastronomique){
+              let tmpplat = parseInt(Math.random()*this.listegastroplats.length);
+                let tmphdoeuvre = parseInt(Math.random()*this.listegastrohdoeuvre.length);
+                let tmpdessert = parseInt(Math.random()*this.listegastrodessert.length);
+                
+                this.platgastro=this.listegastroplats[tmpplat];
+                this.hdoeuvregastro=this.listegastrohdoeuvre[tmphdoeuvre];
+                this.dessertgastro=this.listegastrodessert[tmpdessert];
+                
+                this.menugastro={
+                    plat:this.platgastro,
+                    hdoeuvre:this.hdoeuvregastro,
+                    dessert:this.dessertgastro
+                }
+            
+            }
+            else{
+                let tmpplat = parseInt(Math.random()*this.listemidiplats.length);
+                let tmphdoeuvre = parseInt(Math.random()*this.listemidihdoeuvre.length);
+                let tmpdessert = parseInt(Math.random()*this.listemididessert.length);
+                
+                this.platmidi=this.listemidiplats[tmpplat];
+                this.hdoeuvremidi=this.listemidihdoeuvre[tmphdoeuvre];
+                this.dessertmidi=this.listemididessert[tmpdessert];
+
+                this.menumidi={
+                    plat:this.platmidi,
+                    hdoeuvre:this.hdoeuvremidi,
+                    dessert:this.dessertmidi
+                }
+
+            }
+           
+       }
 
     },
-    mounted (){
+    async mounted (){
         this.plats=data.carte_plats;
-        this.AddintoList();
+        this.AddintoListCategory();
+        await this.CreateCarte();
+        await this.CreateMenu(false);
+        await this.CreateMenu(true);
     }
 };
 </script>
@@ -69,4 +217,9 @@ export default {
 h1{
     color:blueviolet;
 }
+div .menuMidi,div .menuGastro{
+    display: inline-block;
+    
+}
+
 </style>

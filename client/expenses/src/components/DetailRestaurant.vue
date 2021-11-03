@@ -1,6 +1,6 @@
 <template>
     <div id="DetailRestaurant">
-        <h1>Detail d'un restau qui a pour id :{{id}}</h1>
+        <h1>Detail d'un restau qui a pour id : {{id}}</h1>
 
         <ul>
             <li><b>Nom:</b> {{restaurant.name}}</li>
@@ -10,7 +10,10 @@
            
             
         </ul>
+        <!-- Recuperation de la cartes des plats-->
         <carte-des-plats/> 
+        <menu-restaurant/>
+        <!-- Affichage de la position sur plan du restaurant-->
         <GmapMap
             :center='center'
             :zoom='8'
@@ -28,6 +31,7 @@
 
 <script>
 import CarteDesPlats from './CarteDesPlats.vue';
+import MenuRestaurant from './MenuRestaurant.vue';
 
 
 export default {
@@ -39,6 +43,7 @@ export default {
     },
     components:{
         CarteDesPlats,
+        MenuRestaurant,
     },
     computed:{
         id(){
@@ -49,32 +54,36 @@ export default {
         return{
             restaurant:null, 
             center: { lat:120 , lng: 120},
+            
         }
 
     },
-   
+   //mise en place du mounted en asynchrone afin d'attendre que le fetch recupere toutes les données pour les afficher dont la position de la map 
      async mounted(){
         console.log("Avant affichage, on pourra faire un fetch");
         console.log("ID="+this.id);
         await this.fetchResto(this.id);
+       
         
             
     },
+  
     methods:{
-         async fetchResto(id){
-        let url = "http://localhost:8080/api/restaurants/"+id;
-        
-           await fetch(url)
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                console.log(data.restaurant.nom);
-                this.restaurant=data.restaurant;
-               this.recupCoord();
-            })
-    },
-       
+        // recupere les données du restaurant
+        async fetchResto(id){
+            let url = "http://localhost:8080/api/restaurants/"+id;
+            
+            await fetch(url)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log(data.restaurant.nom);
+                    this.restaurant=data.restaurant;
+                this.recupCoord();
+                })
+        },
+       //recupère les coordonnées du restaurant est assigné le centre ou doit se positionner le marker de la carte
         recupCoord(){
             const coord = ""+this.restaurant.address.coord;
             var splitcoord = coord.split(",");
@@ -90,5 +99,8 @@ export default {
 </script>
 
 <style scoped>
-
+li{
+    text-align: left;
+    margin: 2%;
+}
 </style>
