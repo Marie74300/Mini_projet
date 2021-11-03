@@ -2,9 +2,18 @@
     <div id="CarteDesPlats">
         <h1>Carte des plats du restaurants</h1>
        
-        <div v-for="item in carte" :key="item.plat">
-            <p>Nom: {{ item.nom }}</p>
-            <p>description{{item.description}}</p>
+        <div v-for="(value,index) in carte" :key="index">
+            <p>Nom hors d'oeuvre: {{value.hdoeuvre.nom}}</p>
+            <p>Description hors d'oeuvre: {{value.hdoeuvre.description}}</p>
+            <p><img width="200" height="200" :src="value.hdoeuvre.photo" /></p>
+
+            <p>Nom Plat: {{value.plat.nom}}</p>
+            <p>Description plat: {{value.plat.description}}</p>
+            <p><img width="200" height="200" :src="value.plat.photo" /></p>
+
+            <p>Nom déssert: {{value.dessert.nom}}</p>
+            <p>Description déssert: {{value.dessert.description}}</p>
+            <p><img width="200" height="200" :src="value.dessert.photo" /></p>
         </div>
         
         
@@ -116,7 +125,6 @@ export default {
         CreateCarte(){
             //Ajout de x nb de plats, hors d'oeuvre et dessert aleatoire dans la carte 
                 for(let i=0; i<(parseInt(Math.random()*this.plats.length));i++){
-                        console.log("ouee je suis dedans poulette");
                     
                         let tmpplat = parseInt(Math.random()*this.listeplats.length);
                         let tmphdoeuvre = parseInt(Math.random()*this.listehdoeuvre.length);
@@ -126,11 +134,8 @@ export default {
                         this.hdoeuvre=this.listehdoeuvre[tmphdoeuvre];
                         this.dessert=this.listedessert[tmpdessert];
 
-                        console.log(this.plat);
-                        console.log(this.hdoeuvre);
-                        console.log(this.dessert);
 
-                        this.carte={
+                        this.carte[i]={
                             plat:this.plat,
                             hdoeuvre:this.hdoeuvre,
                             dessert:this.dessert
@@ -175,7 +180,7 @@ export default {
                 this.platgastro=this.listegastroplats[tmpplat];
                 this.hdoeuvregastro=this.listegastrohdoeuvre[tmphdoeuvre];
                 this.dessertgastro=this.listegastrodessert[tmpdessert];
-                
+
                 this.menugastro={
                     plat:this.platgastro,
                     hdoeuvre:this.hdoeuvregastro,
