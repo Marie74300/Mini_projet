@@ -93,6 +93,7 @@ export default {
             nbpageTotal:0,
             msg:"",
             nomRestoRechercher:"",
+            showSnackbar:null,
         
         }},
         mounted(){

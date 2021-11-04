@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.18.1",
+    "element-ui": "^2.15.6",
     "google-images": "^2.1.0",
     "install": "^0.13.0",
     "leaflet": "^1.7.1",

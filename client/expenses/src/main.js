@@ -10,7 +10,11 @@ import VueRouter from 'vue-router'
 import Restaurant from './components/Restaurant.vue'
 import BB from './components/BB.vue'
 import DetailRestaurant from './components/DetailRestaurant.vue'
-import GoogleMap from './components/GoogleMap.vue'
+
+
+import { Carousel, CarouselItem } from 'element-ui';
+Vue.use(Carousel);
+Vue.use(CarouselItem);
 
 Vue.config.productionTip = false
 Vue.use(VueMaterial)
@@ -42,14 +46,6 @@ const router = new VueRouter({
 
       }
 
-    },
-    
-    {
-      path:'/GoogleMap',
-      component:GoogleMap,
-      props:{
-
-      }
     }
   ],
   mode:'history'

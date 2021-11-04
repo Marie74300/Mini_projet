@@ -1,5 +1,5 @@
 <template>
-    <div id="CarteDesPlats">
+    <div v-if="dataReady" id="CarteDesPlats">
         <h1>Carte des plats du restaurants</h1>
        
         <div v-for="(value,index) in carte" :key="index">
@@ -102,6 +102,7 @@ export default {
           tmphdoeuvre:null,
           tmpdessert: null,
           tmpplat:null,
+          dataReady:false,
         
         }
     },
@@ -122,13 +123,12 @@ export default {
                 
             });
         },
-        CreateCarte(){
-            //Ajout de x nb de plats, hors d'oeuvre et dessert aleatoire dans la carte 
-                for(let i=0; i<(parseInt(Math.random()*this.plats.length));i++){
-                    
-                        let tmpplat = parseInt(Math.random()*this.listeplats.length);
+        RecupElementCategorie(i){
+             let tmpplat = parseInt(Math.random()*this.listeplats.length);
                         let tmphdoeuvre = parseInt(Math.random()*this.listehdoeuvre.length);
                         let tmpdessert = parseInt(Math.random()*this.listedessert.length);
+
+                       
 
                         this.plat=this.listeplats[tmpplat];
                         this.hdoeuvre=this.listehdoeuvre[tmphdoeuvre];
@@ -141,35 +141,44 @@ export default {
                             dessert:this.dessert
                         }
                     
-                    if(this.plat.gastronomique===true){
-                        console.log(this.plat.nom);
-                        this.listegastroplats.push(this.plat);
-                    }
-                    else{
-                        console.log(this.plat.nom);
-                        this.listemidiplats.push(this.plat);
-                    }
+                        // ajout des plats des cartes dans les listes gastro midi
+                        if(this.plat.gastronomique===true){
+                            this.listegastroplats.push(this.plat);
+                        }
+                        else{
+                            this.listemidiplats.push(this.plat);
+                        }
 
-                     if(this.hdoeuvre.gastronomique===true){
-                        this.listegastrohdoeuvre.push(this.hdoeuvre);
-                    }
-                    else {
-                        this.listemidihdoeuvre.push(this.hdoeuvre);
-                    }
+                        if(this.hdoeuvre.gastronomique===true){
+                            this.listegastrohdoeuvre.push(this.hdoeuvre);
+                        }
+                        else {
+                            this.listemidihdoeuvre.push(this.hdoeuvre);
+                        }
 
-                     if(this.dessert.gastronomique===true){
-                        this.listegastrodessert.push(this.dessert);
-                    }
-                    else{
-                        this.listemididessert.push(this.dessert);
-                    }
-                }
+                        if(this.dessert.gastronomique===true){
+                            this.listegastrodessert.push(this.dessert);
+                        }
+                        else{
+                            this.listemididessert.push(this.dessert);
+                        }
+
                 
-                     
-            
+        },
+        CreateCarte(){
+            //Ajout de x nb de plats, hors d'oeuvre et dessert aleatoire dans la carte 
+                let taille = parseInt(Math.random()*this.listeplats.length)
+                 console.log(taille);
+                    for(let i=0; i<taille;i++){
+                        
+                        this.RecupElementCategorie(i);
+                        
+                    } 
+                     while(this.listegastroplats.length===0||this.listegastrohdoeuvre.length===0||this.listegastrodessert.length===0 || this.listemidiplats.length===0||this.listemidihdoeuvre.length===0||this.listemididessert.length===0){
 
-           
-
+                        this.RecupElementCategorie();
+                }
+                console.log(this.carte);
         },
         CreateMenu(gastronomique){
            if(gastronomique){
@@ -177,6 +186,7 @@ export default {
                 let tmphdoeuvre = parseInt(Math.random()*this.listegastrohdoeuvre.length);
                 let tmpdessert = parseInt(Math.random()*this.listegastrodessert.length);
                 
+
                 this.platgastro=this.listegastroplats[tmpplat];
                 this.hdoeuvregastro=this.listegastrohdoeuvre[tmphdoeuvre];
                 this.dessertgastro=this.listegastrodessert[tmpdessert];
@@ -186,7 +196,6 @@ export default {
                     hdoeuvre:this.hdoeuvregastro,
                     dessert:this.dessertgastro
                 }
-            
             }
             else{
                 let tmpplat = parseInt(Math.random()*this.listemidiplats.length);
@@ -210,10 +219,11 @@ export default {
     },
     async mounted (){
         this.plats=data.carte_plats;
-        this.AddintoListCategory();
+        await this.AddintoListCategory();
         await this.CreateCarte();
         await this.CreateMenu(false);
         await this.CreateMenu(true);
+        this.dataReady=true;
     }
 };
 </script>

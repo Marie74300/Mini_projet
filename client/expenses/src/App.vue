@@ -1,14 +1,11 @@
 <template>
-  <div id="app">
-
-      <nav class="navbar navbar-expand-lg fixed-top row">
-        
-        <router-link tag="li" class="col" class-active="active" to="/" style="margin-right:10%; ">Home</router-link>
-        <router-link tag="li" class="col" class-active="active" to="/Rechercherestaurant" style="margin-right:10%;">Rechercher un Restaurant</router-link>
-        <router-link tag="li" class="col" class-active="active" to="/Restaurant" style="margin-right:10%;">DetailRestaurant</router-link>
-        <router-link tag="li" class="col" class-active="active" to="/GoogleMap" style="margin-right:10%;">GoogleMap</router-link>
-        
-    </nav>
+  <div id="app" style="margin:0; " >
+    
+       <md-tabs class="md-primary" md-alignment="centered" md-sync-route>
+        <md-tab id="tab-home" md-icon="home" to="/"> </md-tab>
+        <md-tab id="tab-pages" md-icon="search" to="/Rechercherestaurant"></md-tab>
+      </md-tabs>
+      
         <router-view></router-view>
   </div>
 </template>

@@ -77,7 +77,6 @@ export default {
                     return response.json();
                 })
                 .then((data) => {
-                    console.log(data.restaurant.nom);
                     this.restaurant=data.restaurant;
                 this.recupCoord();
                 })
