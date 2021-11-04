@@ -4,7 +4,7 @@
       <nav class="navbar navbar-expand-lg fixed-top row">
         
         <router-link tag="li" class="col" class-active="active" to="/" style="margin-right:10%; ">Home</router-link>
-        <router-link tag="li" class="col" class-active="active" to="/Newcompo" style="margin-right:10%;">Newcompo</router-link>
+        <router-link tag="li" class="col" class-active="active" to="/Rechercherestaurant" style="margin-right:10%;">Rechercher un Restaurant</router-link>
         <router-link tag="li" class="col" class-active="active" to="/Restaurant" style="margin-right:10%;">DetailRestaurant</router-link>
         <router-link tag="li" class="col" class-active="active" to="/GoogleMap" style="margin-right:10%;">GoogleMap</router-link>
         

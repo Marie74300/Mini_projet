@@ -1,7 +1,7 @@
 <template>
     <div id="DetailRestaurant">
         <h1>Detail d'un restau qui a pour id : {{id}}</h1>
-
+        <img :src="this.urlImage"/>
         <ul>
             <li><b>Nom:</b> {{restaurant.name}}</li>
             <li><b>Cuisine:</b> {{restaurant.cuisine}}</li>
@@ -25,6 +25,8 @@
        
         </GmapMap>
         
+        
+        
     </div>
 </template>
 
@@ -32,6 +34,10 @@
 <script>
 import CarteDesPlats from './CarteDesPlats.vue';
 import MenuRestaurant from './MenuRestaurant.vue';
+
+const GoogleImages = require('google-images');
+
+const client = new GoogleImages('4693ac58732c81ac9', 'AIzaSyAuWMgnu2rK7rhrgEAIoKWVnqurYAiyQ9M');
 
 
 export default {
@@ -54,19 +60,12 @@ export default {
         return{
             restaurant:null, 
             center: { lat:120 , lng: 120},
+            urlImage:null,
             
         }
 
     },
-   //mise en place du mounted en asynchrone afin d'attendre que le fetch recupere toutes les données pour les afficher dont la position de la map 
-     async mounted(){
-        console.log("Avant affichage, on pourra faire un fetch");
-        console.log("ID="+this.id);
-        await this.fetchResto(this.id);
-       
-        
-            
-    },
+   
   
     methods:{
         // recupere les données du restaurant
@@ -93,7 +92,26 @@ export default {
             console.log("latitude: "+latcoord+","+"longitude:"+longcoord);
             this.center={lat: parseFloat(latcoord), lng : parseFloat(longcoord)};
 
+        },
+        searchImage(){
+            window.setImmediate = window.setTimeout;
+            client.search('restaurants'+ this.restaurant.name)
+            .then(images => {
+                this.urlImage=images[0].url;
+        
+           
+         
+            });
         }
+    },
+    //mise en place du mounted en asynchrone afin d'attendre que le fetch recupere toutes les données pour les afficher dont la position de la map 
+     async mounted(){
+        console.log("Avant affichage, on pourra faire un fetch");
+        console.log("ID="+this.id);
+        await this.fetchResto(this.id);
+       await this.searchImage();
+        
+            
     }
 };
 </script>

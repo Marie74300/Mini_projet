@@ -8,7 +8,7 @@ import VueRouter from 'vue-router'
 
 //imports components
 import Restaurant from './components/Restaurant.vue'
-import Newcompo from './components/Newcompo.vue'
+import BB from './components/BB.vue'
 import DetailRestaurant from './components/DetailRestaurant.vue'
 import GoogleMap from './components/GoogleMap.vue'
 
@@ -22,18 +22,18 @@ Vue.use(VueGoogleMaps, {
   }
 });
 
+
+
+
 const router = new VueRouter({
   routes:[
     {
       path:'/',
-      component:Restaurant,
+      component:BB,
     },
     {
-      path:'/Newcompo',
-      component:Newcompo,
-      props:{
-        msg:"Coucou guys"
-      }
+      path:'/Rechercherestaurant',
+      component:Restaurant
     },
     {
       path:'/Restaurant/:id',
