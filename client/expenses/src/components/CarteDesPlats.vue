@@ -162,7 +162,19 @@ export default {
                         else{
                             this.listemididessert.push(this.dessert);
                         }
-
+                        console.log("encore"+i+"fois");
+                        console.log("GH");
+                        console.log(this.listegastrohdoeuvre);
+                        console.log("GP");
+                    console.log(this.listegastroplats);
+                    console.log("GD");
+                    console.log(this.listegastrodessert);
+                    console.log("P");
+                    console.log(this.listemidiplats);
+                    console.log("H");
+                    console.log(this.listemidihdoeuvre);
+                    console.log("D");
+                    console.log(this.listemididessert);
                 
         },
         CreateCarte(){
@@ -175,10 +187,25 @@ export default {
                         
                     } 
                      while(this.listegastroplats.length===0||this.listegastrohdoeuvre.length===0||this.listegastrodessert.length===0 || this.listemidiplats.length===0||this.listemidihdoeuvre.length===0||this.listemididessert.length===0){
-
+                         console.log("tu es rentré là ? ")
                         this.RecupElementCategorie();
                 }
-                console.log(this.carte);
+                console.log("AH! Deja fini...");
+                 console.log("GH");
+                        console.log(this.listegastrohdoeuvre);
+                        console.log("GP");
+                    console.log(this.listegastroplats);
+                    console.log("GD");
+                    console.log(this.listegastrodessert);
+                    console.log("P");
+                    console.log(this.listemidiplats);
+                    console.log("H");
+                    console.log(this.listemidihdoeuvre);
+                    console.log("D");
+                    console.log(this.listemididessert);
+                
+                
+                
         },
         CreateMenu(gastronomique){
            if(gastronomique){
