@@ -60,9 +60,12 @@ les erreurs et Bugs fréquents:
 tous les restaurants se trouvent en Antarctique, et en vérifiant le code source nous avons pu corriger l'erreur,
 et inverser les parametres LONG (longitude) ET LAT (latitude) et retrouver la localisation correcte des restaurants.   
 
-  nous avons rencontré des difficultés avec les cartes plats for whille if 
+  Nous avons rencontré des difficultés avec les cartes plats en effet pour faire de l'aleatoire nous avons du creer une boucle for allant recuperer aleatoirement i elements plats, dessert, hors d'oeuvre et les ajouter a nos cartes et aux listes gastronomiques et midi correspondantes. A notre sortie il faut donc verifier si toutes nos listes ne sont pas nulles, si elles le sont alors il faut retourner chercher des elements.  
   
-  
+ Lien de la video demo:
+ https://youtu.be/Vo7NtvYuXJE
+ 
+ 
   les Sources et documentations utilisées et consultées durant le projet 
   https://stackoverflow.com/
   
