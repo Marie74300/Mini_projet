@@ -14,7 +14,7 @@ npm install
 npm run serve
 ```
 
-Le Mini_Projet est un projet web developpé sous VUE, par des .... 
+Le Mini_Projet est un projet web developpé sous VUE,
 
 l'arborescence du projet:
 
