@@ -17,10 +17,10 @@
           <!--Affiche le formulaire permettant d'ajouter un restaurant -->
         <h2>Ajouter un restaurant</h2>
          <p class="explicationResto">Tu n'as pas trouver ta super bouffe, alors ajoute-le </p>
-        <form @submit="ajouterRestaurant">
+        <form v-on:submit="ajouterRestaurant">
                 <md-field>
                     <label>Nom : </label>
-                        <md-input type="text"  required v-model="nom"></md-input>
+                        <md-input type="text" name="nom" required v-model="nom"></md-input>
                 </md-field>
         
                 <md-field>
@@ -28,7 +28,8 @@
                         <md-input type="text" required v-model="cuisine"></md-input>
                     
                 </md-field>
-            <md-button class="md-raised">Ajouter</md-button>
+            
+           <md-button type="submit" class="md-raised">Ajouter</md-button>
         </form>
         <br/>
     
@@ -168,14 +169,15 @@ export default {
             supprimerRestaurant(index) {
                 this.restaurants.splice(index, 1);
             },
-            ajouterRestaurant($event) {
+            ajouterRestaurant(event) {
                 // eviter le comportement par defaut
-                let form = $event.target();
-                let donneesFrom= new FormData(form);
+                
+                let form = event.target;
+                let donneesForm= new FormData(form);
                 let url="http://localhost:8080/api/restaurants?";
                 fetch(url,{
                     method:"POST",
-                    body: donneesFrom,
+                    body: donneesForm,
                 })
                     .then((responseJson)=>{
                         responseJson.json().then((resJS)=>{
