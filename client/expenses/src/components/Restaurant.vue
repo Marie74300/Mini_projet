@@ -1,4 +1,5 @@
 <template>
+
  <div id="NbResto">
      <!--affiche le nombre de restaurants dans la base de données-->
     <h1>Nombre de restaurants : {{nbRestaurantTotal}}</h1>
@@ -202,14 +203,14 @@ td {
 }
 
 tr:hover {
-    background-color: grey;
+    background-color: rgb(199, 216, 226);
 }
 input:invalid {
-    background-color: pink;
+    background-color: rgb(202, 221, 203);
 }
 
 input:valid {
-    background-color: lightGreen;
+    background-color: rgb(195, 233, 195);
 }
 
 .bordureRouge {

@@ -27,26 +27,26 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #0a0000;
   margin-top: 60px;
   
 }
 nav li:hover,
    nav li:active{
-      background-color:white;
+      background-color:rgb(20, 69, 230);
       cursor: pointer;
-      color: black;
+      color: rgb(228, 13, 13);
     }
 nav li {
   
   display: inline-block;
-  color: white;
+  color: rgb(219, 28, 28);
   border-radius: 10%;
   size: 10%
   
 }
 nav{
-  background-color: rgb(95, 168, 197);
+  background-color: rgb(221, 61, 12);
   
 }
 

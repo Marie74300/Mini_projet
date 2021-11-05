@@ -1,52 +1,115 @@
 <template>
-    <div id="bb">
-        <div class="bienvenue">
-            <h1>Bienvenue sur BB (bouffebien.com)</h1>
-           <div class="md-layout">
-            <div class="md-layout-item md-size-66 mx-auto md-small-size-100">
-                <md-card>
-                <el-carousel
-                    trigger="click"
-                    :interval="5000">
-                    <el-carousel-item v-for="item in carousel" :key="item.image">
-                    <h4 class="carousel-caption">
-                        <md-icon>location_on</md-icon>
-                        {{item.title}}
-                    </h4>
-                    <img :src="item.image" alt="">
-                    </el-carousel-item>
-                </el-carousel>
-                </md-card>
-            </div>
-            </div>
 
-                
+  <div>
+    <div>
+      <div class="bg"></div>
+      <div class="bg bg2"></div>
+      <div class="bg bg3"></div>
+      <div class="content">
+        <h1>Bienvenue sur BB (bouffebien.com)</h1>
+      </div>
+
+      <div class="container">
+        <div class="carousel">
+          <div class="carousel__face"></div>
+          <div class="carousel__face"></div>
+          <div class="carousel__face"></div>
+          <div class="carousel__face"></div>
+          <div class="carousel__face"></div>
+          <div class="carousel__face"></div>
+          <div class="carousel__face"></div>
+          <div class="carousel__face"></div>
+          <div class="carousel__face"></div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 
 <script>
 
-
-export default {
-    name:"BB",
-     data() {
-     return {
-       carousel: [
-           {image:"https://media-cdn.tripadvisor.com/media/photo-s/12/96/4b/a3/la-terrasse-au-coucher.jpg",title:'1'},
-           {image:"https://www.sortiraparis.com/images/80/91874/582754-photos-le-cafe-de-l-homme.jpg",title:"2"},
-           {image:"https://d3aux7tjp119y2.cloudfront.net/original_images/Tak2-CMSTemplate_sqGSCzb.jpg",title:"3"}
-            
-       ]
-     }
-     }
-    
-};
 </script>
 
 <style scoped>
-h1{
-    color:blueviolet;
+h1,h2 {
+  color: rgb(11, 1, 20);
+}
+
+.container {
+  position: relative;
+  width: 320px;
+  margin: 100px auto 0 auto;
+  perspective: 1000px;
+}
+
+.carousel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: rotate360 60s infinite forwards linear;
+}
+.carousel__face {
+  position: absolute;
+  width: 300px;
+  height: 187px;
+  top: 20px;
+  left: 10px;
+  right: 10px;
+  background-size: cover;
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
+  display: flex;
+}
+
+span {
+  margin: auto;
+  font-size: 2rem;
+}
+
+.carousel__face:nth-child(1) {
+  background-image: url("https://media-cdn.tripadvisor.com/media/photo-s/12/96/4b/a3/la-terrasse-au-coucher.jpg");
+  transform: rotateY(0deg) translateZ(430px);
+}
+.carousel__face:nth-child(2) {
+  background-image: url("https://www.sortiraparis.com/images/80/91874/582754-photos-le-cafe-de-l-homme.jpg");
+  transform: rotateY(40deg) translateZ(430px);
+}
+.carousel__face:nth-child(3) {
+  background-image: url("https://d3aux7tjp119y2.cloudfront.net/original_images/Tak2-CMSTemplate_sqGSCzb.jpg");
+  transform: rotateY(80deg) translateZ(430px);
+}
+.carousel__face:nth-child(4) {
+  background-image: url("https://images.pexels.com/photos/1394841/pexels-photo-1394841.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  transform: rotateY(120deg) translateZ(430px);
+}
+.carousel__face:nth-child(5) {
+  background-image: url("https://images.pexels.com/photos/969679/pexels-photo-969679.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  transform: rotateY(160deg) translateZ(430px);
+}
+.carousel__face:nth-child(6) {
+  background-image: url("https://images.pexels.com/photos/1834400/pexels-photo-1834400.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  transform: rotateY(200deg) translateZ(430px);
+}
+.carousel__face:nth-child(7) {
+  background-image: url("https://images.pexels.com/photos/1415268/pexels-photo-1415268.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  transform: rotateY(240deg) translateZ(430px);
+}
+.carousel__face:nth-child(8) {
+  background-image: url("https://images.pexels.com/photos/135018/pexels-photo-135018.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  transform: rotateY(280deg) translateZ(430px);
+}
+.carousel__face:nth-child(9) {
+  background-image: url("https://images.pexels.com/photos/1175135/pexels-photo-1175135.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  transform: rotateY(320deg) translateZ(430px);
+}
+
+@keyframes rotate360 {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(-360deg);
+  }
 }
 </style>
