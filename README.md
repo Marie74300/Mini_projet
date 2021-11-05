@@ -63,8 +63,7 @@ et inverser les parametres LONG (longitude) ET LAT (latitude) et retrouver la lo
   Nous avons rencontré des difficultés avec les cartes plats en effet pour faire de l'aleatoire nous avons du creer une boucle for allant recuperer aleatoirement i elements plats, dessert, hors d'oeuvre et les ajouter a nos cartes et aux listes gastronomiques et midi correspondantes. A notre sortie il faut donc verifier si toutes nos listes ne sont pas nulles, si elles le sont alors il faut retourner chercher des elements.  
   
  Lien de la video demo:
- https://youtu.be/Vo7NtvYuXJE
- 
+https://youtu.be/TYTb7vBDf4I
  
   les Sources et documentations utilisées et consultées durant le projet 
   https://stackoverflow.com/
