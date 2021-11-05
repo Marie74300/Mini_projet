@@ -252,19 +252,8 @@ export default {
       } else {
         this.listemididessert.push(this.dessert);
       }
-      console.log("encore" + i + "fois");
-      console.log("GH");
-      console.log(this.listegastrohdoeuvre);
-      console.log("GP");
-      console.log(this.listegastroplats);
-      console.log("GD");
-      console.log(this.listegastrodessert);
-      console.log("P");
-      console.log(this.listemidiplats);
-      console.log("H");
-      console.log(this.listemidihdoeuvre);
-      console.log("D");
-      console.log(this.listemididessert);
+      
+    
     },
     CreateCarte() {
       //Ajout de x nb de plats, hors d'oeuvre et dessert aleatoire dans la carte
@@ -273,6 +262,7 @@ export default {
       for (let i = 0; i < taille; i++) {
         this.RecupElementCategorie(i);
       }
+      let i=0;
       while (
         this.listegastroplats.length === 0 ||
         this.listegastrohdoeuvre.length === 0 ||
@@ -281,22 +271,9 @@ export default {
         this.listemidihdoeuvre.length === 0 ||
         this.listemididessert.length === 0
       ) {
-        console.log("tu es rentré là ? ");
-        this.RecupElementCategorie();
+        this.RecupElementCategorie(i);
+        i++;
       }
-      console.log("AH! Deja fini...");
-      console.log("GH");
-      console.log(this.listegastrohdoeuvre);
-      console.log("GP");
-      console.log(this.listegastroplats);
-      console.log("GD");
-      console.log(this.listegastrodessert);
-      console.log("P");
-      console.log(this.listemidiplats);
-      console.log("H");
-      console.log(this.listemidihdoeuvre);
-      console.log("D");
-      console.log(this.listemididessert);
     },
     CreateMenu(gastronomique) {
       if (gastronomique) {

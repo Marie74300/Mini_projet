@@ -84,7 +84,7 @@ span {
   transform: rotateY(120deg) translateZ(430px);
 }
 .carousel__face:nth-child(5) {
-  background-image: url("https://images.pexels.com/photos/969679/pexels-photo-969679.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-image: url("https://www.edelweiss74.com/media/slide4.jpg");
   transform: rotateY(160deg) translateZ(430px);
 }
 .carousel__face:nth-child(6) {

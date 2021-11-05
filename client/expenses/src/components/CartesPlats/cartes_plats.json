@@ -37,7 +37,7 @@
         "type": "hors d'oeuvre",
         "gastronomique":false,
         "description": "terrine de comté à la moutarde et curry accompagné de salade",
-        "photo":".https://www.simpleetbon.com/system/recipes/photos/000/000/146/original/terrine_de_fromage_frais_legumes.jpg?1476895362",
+        "photo":"https://www.simpleetbon.com/system/recipes/photos/000/000/146/original/terrine_de_fromage_frais_legumes.jpg?1476895362",
         "prix":"11.5"
       },
       {
@@ -85,7 +85,7 @@
         "type":"dessert",
         "gastronomique":true,
         "description": "Millefeuille au caramel ",
-        "photo":".https://i-reg.unimedias.fr/sites/art-de-vivre/files/styles/recipe/public/r40_mille-feuille-plue-caramel-paquerettes_bw.jpg?auto=compress%2Cformat&crop=faces%2Cedges&cs=srgb&fit=crop&h=500&w=393",
+        "photo":"https://i-reg.unimedias.fr/sites/art-de-vivre/files/styles/recipe/public/r40_mille-feuille-plue-caramel-paquerettes_bw.jpg?auto=compress%2Cformat&crop=faces%2Cedges&cs=srgb&fit=crop&h=500&w=393",
         "prix":"12"
       },
       {
