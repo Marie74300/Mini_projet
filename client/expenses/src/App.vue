@@ -1,6 +1,6 @@
 <template>
   <div id="app" style="margin:0; " >
-    
+      
        <md-tabs class="md-primary" md-alignment="centered" md-sync-route>
         <md-tab id="tab-home" md-icon="home" to="/"> </md-tab>
         <md-tab id="tab-pages" md-icon="search" to="/Rechercherestaurant"></md-tab>

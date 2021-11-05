@@ -9,13 +9,13 @@
       <div class="card u-clearfix">
         <div class="card-body">
           <h2 class="card-title">{{ restaurant.name }}</h2>
-          <span class="card-number">Cuisine: {{ restaurant.cuisine }} </span>
+          <span class="card-number"><b>Cuisine:</b> {{ restaurant.cuisine }} </span>
           <br /><br />
 
           <span class="card-description subtle"
-            >Rue: {{ restaurant.address.street }}</span>
+            > <b>Rue:</b> {{ restaurant.address.street }}</span>
           <span class="card-author subtle"
-            >Ville: {{ restaurant.borough }}</span>
+            ><b>Ville:</b> {{ restaurant.borough }}</span>
           
         </div>
         <img
