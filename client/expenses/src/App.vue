@@ -1,12 +1,12 @@
 <template>
-  <div id="app">
+  <div id="app" style="margin:0; " >
     
-    <router-link to="/">[Home]</router-link>
-    <router-link to="/Newcompo">[Newcompo]</router-link>
-    <router-link to="/Restaurant">[Restaurant]</router-link>
-     <router-link to="/GoogleMap">[GoogleMap]</router-link>
-    <router-view></router-view>
-    
+       <md-tabs class="md-primary" md-alignment="centered" md-sync-route>
+        <md-tab id="tab-home" md-icon="home" to="/"> </md-tab>
+        <md-tab id="tab-pages" md-icon="search" to="/Rechercherestaurant"></md-tab>
+      </md-tabs>
+      
+        <router-view></router-view>
   </div>
 </template>
 
@@ -27,9 +27,27 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #0a0000;
   margin-top: 60px;
+  
 }
-
+nav li:hover,
+   nav li:active{
+      background-color:rgb(20, 69, 230);
+      cursor: pointer;
+      color: rgb(228, 13, 13);
+    }
+nav li {
+  
+  display: inline-block;
+  color: rgb(219, 28, 28);
+  border-radius: 10%;
+  size: 10%
+  
+}
+nav{
+  background-color: rgb(221, 61, 12);
+  
+}
 
 </style>
