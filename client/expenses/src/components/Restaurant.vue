@@ -25,7 +25,7 @@
         
                 <md-field>
                     <label>Cuisine :</label>
-                        <md-input type="text" required v-model="cuisine"></md-input>
+                        <md-input type="text" name="cuisine" required v-model="cuisine"></md-input>
                     
                 </md-field>
             
