@@ -1,12 +1,18 @@
 <template>
 
-  <div>
+  <div class="bb">
+   
     <div>
-      <div class="bg"></div>
-      <div class="bg bg2"></div>
-      <div class="bg bg3"></div>
+     
       <div class="content">
+        <img  width="327"
+                height="420" :src="require(`@/assets/BB.png`)" />
+                <br/>
+                <br/>
         <h1>Bienvenue sur BB (bouffebien.com)</h1>
+         <h2> Vous pouvez sur notre site rechercher et/ou ajouter un restaurant dans lequel vous pourrez vous rassasier </h2>
+         <h3> Pour cela cliquer sur la petite loupe du menu</h3>
+         <br/>
       </div>
 
       <div class="container">
@@ -22,7 +28,9 @@
           <div class="carousel__face"></div>
         </div>
       </div>
+      
     </div>
+    
   </div>
 </template>
 
@@ -112,4 +120,16 @@ span {
     transform: rotateY(-360deg);
   }
 }
+.content{
+  display: inline-block;
+}
+h1{
+  color: rgb(49, 134, 190);
+  font-size: 50px;
+  
+}
+h2,h3{
+  font: 2rem 'AmstelvarAlpha', sans-serif;
+}
+
 </style>

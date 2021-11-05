@@ -1,25 +1,91 @@
 <template>
   <div v-if="dataReady" id="CarteDesPlats">
+    <!-- Affichage de la carte des plats-->
     <h1>Carte des plats du restaurants</h1>
-
-    <div v-for="(value, index) in carte" :key="index">
-      <p>Nom hors d'oeuvre: {{ value.hdoeuvre.nom }}</p>
-      <p>Description hors d'oeuvre: {{ value.hdoeuvre.description }}</p>
-      <p><img width="200" height="200" :src="value.hdoeuvre.photo" /></p>
-
-      <p>Nom Plat: {{ value.plat.nom }}</p>
-      <p>Description plat: {{ value.plat.description }}</p>
-      <p><img width="200" height="200" :src="value.plat.photo" /></p>
-
-      <p>Nom déssert: {{ value.dessert.nom }}</p>
-      <p>Description déssert: {{ value.dessert.description }}</p>
-      <p><img width="200" height="200" :src="value.dessert.photo" /></p>
+    <div class="toutesCarte">
+    <div class="afficheCarte">
+      <h2>Hors d'oeuvres: </h2>
+      <div class="wrapper">
+      <!-- Affichage par un for de la carte des hdoeuvres-->
+          <div v-for="(value, index) in cartehdoevre" :key="index">
+              <div class="product-img">
+                <img width="327" height="420" :src="value.hdoeuvre.photo" />
+              </div>
+              <div class="product-info">
+                    <div class="product-text">
+                      <p>Nom hors d'oeuvre: {{ value.hdoeuvre.nom }}</p>
+                      <p>Description hors d'oeuvre: {{ value.hdoeuvre.description }}</p>
+                    </div>
+                    <div class="product-price-btn">
+                      <p>
+                      <span>{{ value.hdoeuvre.prix }}</span
+                      >€
+                      </p>
+                  </div>
+                    
+              </div>
+            
+          </div>
+      </div>
     </div>
+  
 
+    <div class="afficheCarte">
+      <h2>Plats:</h2>
+      <div class="wrapper">
+        <!-- Affichage par un for de la carte des plats-->
+          <div   v-for="(value, index) in carte" :key="index">
+              <div class="product-img">
+                  <img width="327" height="420" :src="value.plat.photo" />
+              </div>
+                <div class="product-info">
+                      <div class="product-text">
+                        <p>Nom Plat: {{ value.plat.nom }}</p>
+                        <p>Description plat: {{ value.plat.description }}</p>
+                      </div>
+                      <div class="product-price-btn">
+                        <p>
+                        <span>{{ value.plat.prix }}</span
+                        >€</p>
+                      </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  
+
+    <div class="afficheCarte">
+    <h2>Désserts:</h2>
+     <div class="wrapper">
+        <!-- Affichage par un for de la carte des dessert-->
+        <div  v-for="(value, index) in cartedessert" :key="index">
+          <div class="product-img">
+              <img width="327" height="420" :src="value.dessert.photo" />
+          </div>
+           <div class="product-info">
+                  <div class="product-text">
+                    <p>Nom déssert: {{ value.dessert.nom }}</p>
+                    <p>Description déssert: {{ value.dessert.description }}</p>
+                  </div>
+                  <div class="product-price-btn">
+                    <p>
+                     <span> {{ value.dessert.prix }}</span
+                    >€</p>
+                  </div>
+           </div>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  
+   <!-- Affichage des menus -->
     <div class="menus">
+      <!-- Affichage des menus du midi -->
       <div class="menuMidi">
         <h1>Menu Midi</h1>
         <div>
+          <!-- Affichage des hors d'oeuvre des menus du midi -->
           <div class="wrapper">
             <div class="product-img">
               <img
@@ -30,7 +96,7 @@
             </div>
             <div class="product-info">
               <div class="product-text">
-                <h1>Nom du hors d'oeuvre: {{ this.menumidi.hdoeuvre.nom }}</h1>
+                <h1>Hors d'oeuvre: {{ this.menumidi.hdoeuvre.nom }}</h1><br/>
                 <p>Description: {{ this.menumidi.hdoeuvre.description }}</p>
               </div>
               <div class="product-price-btn">
@@ -42,7 +108,7 @@
             </div>
           </div>
         </div>
-
+      <!-- Affichage des plats des menus du midi -->
         <div>
           <div class="wrapper">
             <div class="product-img">
@@ -50,7 +116,7 @@
             </div>
             <div class="product-info">
               <div class="product-text">
-                <h1>Nom du plat: {{ this.menumidi.plat.nom }}</h1>
+                <h1>Plat: {{ this.menumidi.plat.nom }}</h1><br/>
                 <p>Description: {{ this.menumidi.plat.description }}</p>
               </div>
               <div class="product-price-btn">
@@ -62,7 +128,7 @@
             </div>
           </div>
         </div>
-
+      <!-- Affichage des désserts des menus du midi -->
         <div>
           <div class="wrapper">
             <div class="product-img">
@@ -74,7 +140,7 @@
             </div>
             <div class="product-info">
               <div class="product-text">
-                <h1>Nom du Dessert: {{ this.menumidi.dessert.nom }}</h1>
+                <h1>Dessert: {{ this.menumidi.dessert.nom }}</h1><br/>
                 <p>Description: {{ this.menumidi.dessert.description }}</p>
               </div>
               <div class="product-price-btn">
@@ -88,8 +154,10 @@
         </div>
     </div>
 
+    <!-- Affichage du menu gastro -->
       <div class="menuGastro">
         <h1>Menu Gastronomique</h1>
+        <!-- Affichage des hors d'oeuvre du menu gastro-->
          <div>
           <div class="wrapper">
             <div class="product-img">
@@ -101,7 +169,7 @@
             </div>
             <div class="product-info">
               <div class="product-text">
-                <h1>Nom du hors d'oeuvre: {{ this.menugastro.hdoeuvre.nom }}</h1>
+                <h1>Hors d'oeuvre: {{ this.menugastro.hdoeuvre.nom }}</h1><br/>
                 <p>Description: {{ this.menugastro.hdoeuvre.description }}</p>
               </div>
               <div class="product-price-btn">
@@ -113,7 +181,7 @@
             </div>
           </div>
         </div>
-
+        <!-- Affichage des plats du menu gastro-->
         <div>
           <div class="wrapper">
             <div class="product-img">
@@ -121,7 +189,7 @@
             </div>
             <div class="product-info">
               <div class="product-text">
-                <h1>Nom du plat: {{ this.menugastro.plat.nom }}</h1>
+                <h1>Plat: {{ this.menugastro.plat.nom }}</h1><br/>
                 <p>Description: {{ this.menugastro.plat.description }}</p>
               </div>
               <div class="product-price-btn">
@@ -133,7 +201,7 @@
             </div>
           </div>
         </div>
-
+      <!-- Affichage des dessert du menu gastro-->
         <div>
           <div class="wrapper">
             <div class="product-img">
@@ -145,7 +213,7 @@
             </div>
             <div class="product-info">
               <div class="product-text">
-                <h1>Nom du Dessert : {{ this.menugastro.dessert.nom }}</h1>
+                <h1>Dessert : {{ this.menugastro.dessert.nom }}</h1> <br/>
                 <p>Description: {{ this.menugastro.dessert.description }}</p>
               </div>
               <div class="product-price-btn">
@@ -175,16 +243,22 @@ export default {
       listegastroplats: [],
       listegastrohdoeuvre: [],
       listegastrodessert: [],
+
       //creation des listes de tous les plats du midi
       listemidiplats: [],
       listemidihdoeuvre: [],
       listemididessert: [],
-
+      //creation des listes de chaque type 
       listeplats: [],
       listehdoeuvre: [],
       listedessert: [],
 
+      //creation des cartes par type
       carte: [],
+      cartehdoevre:[],
+      cartedessert:[],
+
+      //creation des menus et des types correspondant
       menugastro: [],
       menumidi: [],
       hdoeuvre: null,
@@ -202,6 +276,7 @@ export default {
       tmphdoeuvre: null,
       tmpdessert: null,
       tmpplat: null,
+      //permet d'afficher les données seulement si elles sont toutes chargées
       dataReady: false,
     };
   },
@@ -219,6 +294,7 @@ export default {
         }
       });
     },
+    //permet de recuperer aleatoirement i elements de chaque categorie et de les ajouter aux cartes correspondantes
     RecupElementCategorie(i) {
       let tmpplat = parseInt(Math.random() * this.listeplats.length);
       let tmphdoeuvre = parseInt(Math.random() * this.listehdoeuvre.length);
@@ -229,9 +305,15 @@ export default {
       this.dessert = this.listedessert[tmpdessert];
 
       this.carte[i] = {
-        plat: this.plat,
-        hdoeuvre: this.hdoeuvre,
-        dessert: this.dessert,
+        plat: this.plat
+      };
+      this.cartehdoevre[i] = {
+       
+        hdoeuvre: this.hdoeuvre
+      };
+      this.cartedessert[i] = {
+       
+        dessert: this.dessert
       };
 
       // ajout des plats des cartes dans les listes gastro midi
@@ -262,6 +344,7 @@ export default {
       for (let i = 0; i < taille; i++) {
         this.RecupElementCategorie(i);
       }
+      //tant que  l'une des liste est null on recupere de nouveaux elements dans les listes
       let i=0;
       while (
         this.listegastroplats.length === 0 ||
@@ -275,7 +358,9 @@ export default {
         i++;
       }
     },
+
     CreateMenu(gastronomique) {
+      //si le menu est gastronomique on recupere aleatoirement  element de chaque categorie qui constitura notre menu gastro
       if (gastronomique) {
         let tmpplat = parseInt(Math.random() * this.listegastroplats.length);
         let tmphdoeuvre = parseInt(
@@ -294,7 +379,7 @@ export default {
           hdoeuvre: this.hdoeuvregastro,
           dessert: this.dessertgastro,
         };
-      } else {
+      } else {//si le menu n'est pas gastro on recupere aleatoirement  element de chaque categorie qui constitura notre menu midi
         let tmpplat = parseInt(Math.random() * this.listemidiplats.length);
         let tmphdoeuvre = parseInt(
           Math.random() * this.listemidihdoeuvre.length
@@ -414,4 +499,11 @@ span {
   font-family: "Suranna", serif;
   font-size: 34px;
 }
+.toutesCarte{
+  display: inline-block;
+}
+div.afficheCarte{
+  float:left;
+}
+
 </style>

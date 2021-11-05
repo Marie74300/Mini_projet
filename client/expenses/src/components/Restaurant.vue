@@ -1,12 +1,22 @@
 <template>
 
  <div id="NbResto">
-     <!--affiche le nombre de restaurants dans la base de données-->
-    <h1>Nombre de restaurants : {{nbRestaurantTotal}}</h1>
-    <h2>{{msg}}</h2>>
-    <!--Affiche le formulaire permettant d'ajouter un restaurant -->
+     
+    
+        <br/><br/><br/>
+         <h1> Trouve ta Bouffe </h1>
+         <p>Recherche ou ajoute un nouveau restaurant dans la base de données de BB</p>
+        <br/><br/><br/>
+
+
     <div class="formulaire">
+        <!--affiche le nombre de restaurants dans la base de données-->
+        <h2 class="nbResto">Nombre de restaurants :<b style="color:green;"> {{nbRestaurantTotal}}</b></h2><br/>
+
+
+          <!--Affiche le formulaire permettant d'ajouter un restaurant -->
         <h2>Ajouter un restaurant</h2>
+         <p class="explicationResto">Tu n'as pas trouver ta super bouffe, alors ajoute-le </p>
         <form @submit="ajouterRestaurant">
                 <md-field>
                     <label>Nom : </label>
@@ -20,10 +30,13 @@
                 </md-field>
             <md-button class="md-raised">Ajouter</md-button>
         </form>
+        <br/>
     
     
         <!--affiche une barre de recherche ainsi que d'une snackbar permettant d'afficher une erreur si restaurant n'est pas trouver dans la bdd-->
-        <h1>Rechercher un restaurant</h1>
+        <h2>Rechercher un restaurant</h2>
+        <p class="explicationResto">Find your perfect bouffe</p>
+
 
             <md-field>
                 <label>Chercher par nom: </label>
@@ -35,8 +48,11 @@
                     <span class="md-error" >Erreur: Nom introuvable dans la base de données</span>
                 </md-snackbar>
             </md-field>
+            <br/>
+
+
         <!--Permet de filtrer le nombre de restaurants afficher par page du tableau -->
-        <p>NB pages total : {{nbpageTotal}}</p>
+        <h2 style="text-align:left;">NB pages total : <b style="color:green;">{{nbpageTotal}}</b></h2>
         
             <div class="slidecontainer">
                 <h2>Nombre de resto: 
@@ -47,17 +63,17 @@
             </div>
     </div>
 
-
-        <md-button  class="md-raised" :disabled="page===0" @click="pagePrecedente()">Précédent</md-button>&nbsp;&nbsp;
-        <md-button  class="md-raised" :disabled="page===nbpageTotal" @click="pageSuivante()">Suivant</md-button>
+        
+        <md-button  class="md-raised" style="font-size:20px;" :disabled="page===0" @click="pagePrecedente()">Précédent</md-button>&nbsp;&nbsp;
+        <md-button  class="md-raised" style="font-size:20px;" :disabled="page===nbpageTotal" @click="pageSuivante()">Suivant</md-button>
     
-    <md-table v-model="restaurants" md-sort="name" md-sort-order="asc">
-        <md-table-row>
-            <md-table-head >Nom</md-table-head>
-            <md-table-head>Cuisine </md-table-head>
-            <md-table-head>Ville </md-table-head>
-            <md-table-head>Actions </md-table-head>
-            <md-table-head>Supression restaurant</md-table-head>
+    <md-table v-model="restaurants" md-sort="name" md-sort-order="asc" >
+        <md-table-row  >
+            <md-table-head style="text-align:center; font-size:20px;" >Nom</md-table-head>
+            <md-table-head style="text-align:center; font-size:20px;">Cuisine </md-table-head>
+            <md-table-head style="text-align:center; font-size:20px;">Ville </md-table-head>
+            <md-table-head style="text-align:center; font-size:20px;">Actions </md-table-head>
+            <md-table-head style="text-align:center; font-size:20px;">Supression restaurant</md-table-head>
         </md-table-row>
         
             <md-table-row v-bind:key="index" v-for="r,index in restaurants" 
@@ -70,9 +86,9 @@
                 <md-table-cell md-label="Cuisine" md-sort-by="cuisine"> {{r.cuisine}}</md-table-cell>
                 <md-table-cell md-label="Ville" md-sort-by="ville">{{r.borough}}</md-table-cell>
                 <md-table-cell md-label="Router">
-                    <router-link :to="'/Restaurant/'+r._id">[DetailRestaurant]</router-link>
+                    <md-button class="md-raised" :to="'/Restaurant/'+r._id">DetailRestaurant</md-button>
                 </md-table-cell>
-                <md-table-cell><md-button class="md-raised" @click="supprimerRestaurant()">Supprimer le restaurant</md-button></md-table-cell>
+                <md-table-cell><md-button class="md-raised md-accent" @click="supprimerRestaurant()">Supprimer le restaurant</md-button></md-table-cell>
             </md-table-row>
         
     </md-table>
@@ -223,6 +239,31 @@ input:valid {
 div .formulaire{
     display:block;
     width: 50%;
+}
+.md-table-head-label {
+    padding-left: 40%;
+    size: 40%;
+}
+h2{
+    font-size: 30px;
+}
+.nbResto{
+    text-align: left;
+    font-size:40px;
+    
+    
+}
+h1{
+    font-size: 50px;
+    
+}
+p{
+    font-size: 20px;
+    font: 2rem 'AmstelvarAlpha', sans-serif;
+}
+.explicationResto{
+    font: 2rem 'AmstelvarAlpha', sans-serif;
+    font-size: 18px;
 }
 
 </style>
